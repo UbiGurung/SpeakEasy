@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import _ from 'lodash';
 import * as actions from '../actions';
 import ListItem from './ListItem';
+import "./style.css";
 
 class List extends Component {
   state = {
@@ -10,15 +11,15 @@ class List extends Component {
     formValue: ""
   };
 
-  inputChange = e => {
-    this.setState({addFormValue: e.target.value});
+  inputChange = event => {
+    this.setState({formValue: event.target.value});
   };
 
-  formSubmit = e => {
+  formSubmit = event => {
     const {formValue} = this.state;
-    const {addTodo} = this.props;
-    e.preventDefault();
-    addTodo({title: formValue});
+    const {addToDo} = this.props;
+    event.preventDefault();
+    addToDo({title: formValue});
     this.setState({formValue: ""});
   };
 
@@ -26,10 +27,9 @@ class List extends Component {
     const {showForm, formValue} = this.state;
     if (showForm) {
       return (
-        <div>
+        <div id="todo-add-form" className="col s10 offset-s1">
           <form onSubmit={this.formSubmit}>
-            <div>
-              <i>add</i>
+            <div className="input-field">
               <input 
                 value={formValue}
                 onChange={this.inputChange}
@@ -52,7 +52,7 @@ class List extends Component {
       return toDos;
     }
     return (
-      <div>
+      <div className="col s10 offset-s1 center-align">
         <h4>You have no more things ToDo!</h4>
       </div>
     );
@@ -63,17 +63,20 @@ class List extends Component {
   render() {
     const {showForm} = this.state;
     return (
-      <div>
-        <div>
+      <div className="to-do-list-container">
+        <div className="row">
           {this.renderForm()}
           {this.renderToDo()}
         </div>
-        <div>
-          <button onClick={() => this.setState({showForm: !showForm})}>
+        <div className="fixed-action-btn">
+          <button 
+            onClick={() => this.setState({showForm: !showForm})}
+            className="btn-floating btn-large black darken-4"
+          >
           {showForm ? (
-            <i>Close</i>
+            <i className="large material-icons">-</i>
           ) : (
-            <i>Add</i>
+            <i className="large material-icons">+</i>
           )}
           </button>
         </div>
