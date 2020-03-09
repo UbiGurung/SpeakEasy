@@ -1,9 +1,14 @@
 import React from 'react';
 import AppBar from './AppBar';
+import FeedbackControls from '../Participants/FeedbackControls';
 
 class Home extends React.Component{
     render(){
-        return <AppBar />
+        return( 
+        <div>
+            <AppBar />
+            <FeedbackControls />
+        </div>)
     }
 }
 
