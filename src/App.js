@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import List from './components/List';
+import Home from './components/Home/index';
 
 class App extends Component {
   render() {
     return (
-      <div className="container">
-        <List/>
-      </div>
+      <Home/>
     );
   }
 }
