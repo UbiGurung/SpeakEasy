@@ -5,3 +5,7 @@ firebase.initializeApp(FirebaseConfig)
 
 const databaseRef = firebase.database().ref();
 export const todosRef = databaseRef.child("todos");
+
+export const sessionByIdRef = (sessionId) => firebase.database().ref("sessions/" + sessionId);
+
+export const allSessionsRef = firebase.database().ref("sessions");

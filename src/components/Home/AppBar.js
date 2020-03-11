@@ -19,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ButtonAppBar({signInAsAnonymousUser, signOut, authUser}) {
+export default function ButtonAppBar({signInAsAnonymousUser, signInByEmailAndPassword, signOut, authUser}) {
   const classes = useStyles();
   
   return (
@@ -32,7 +32,8 @@ export default function ButtonAppBar({signInAsAnonymousUser, signOut, authUser})
           <Typography variant="h6" className={classes.title}>
             Speak Easy
           </Typography>
-          {authUser ? <Button color="inherit" onClick={signOut}>SignOut</Button> : <Button color="inherit" onClick={signInAsAnonymousUser}>Login</Button>}
+          {authUser ? <Button color="inherit" onClick={signOut}>SignOut</Button> : <><Button color="inherit" onClick={signInAsAnonymousUser}>Login Anon</Button> 
+          <Button color="inherit" onClick={() => signInByEmailAndPassword("speakeremailone@gmail.com", "speakerOne")}>Login</Button></>}
           <Button color="inherit">Register</Button>
         </Toolbar>
       </AppBar>

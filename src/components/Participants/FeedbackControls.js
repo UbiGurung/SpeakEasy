@@ -16,13 +16,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function FeedbackControls() {
+export default function FeedbackControls({createSession}) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
         <Button component={Link} to="/todo">Go to todos</Button>
-        <Button>Two</Button>
+        <Button onClick={createSession}>Create Sessions</Button>
         <Button>Three</Button>
       </ButtonGroup>
     </div>
