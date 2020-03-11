@@ -18,14 +18,12 @@ const useStyles = makeStyles(theme => ({
 
 export default function FeedbackControls() {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
         <Button component={Link} to="/todo">Go to todos</Button>
         <Button>Two</Button>
         <Button>Three</Button>
-        <Button>Test</Button>
       </ButtonGroup>
     </div>
   );
