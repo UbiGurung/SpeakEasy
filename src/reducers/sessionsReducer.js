@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/types';
+import * as R from 'ramda';
 
 export default (state = {}, action) => {
   switch(action.type) {
@@ -19,8 +20,8 @@ export default (state = {}, action) => {
         console.warn('allSessions', action.payload)
         const {allSessions, userId} = action.payload;
 
-        // const filteredSessionsForUser = allSessions.filter(x => x.userId === userId);
-        return allSessions
+        const filteredSessionsForUser = R.filter((x) => x.userId === userId, allSessions);
+        return filteredSessionsForUser
     }
         
     default:
