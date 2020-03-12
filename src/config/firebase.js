@@ -16,4 +16,8 @@ export const votesRef = (sessionId, userId, timeInterval) =>
 
 export const allVotesForSessionRef = (sessionId) => firebase.database().ref('votes/' + sessionId);
 
+export const feedbackRef = (sessionId, userId, date) => firebase.database().ref('feedbacks/' + sessionId + "/" + userId + "/" + date)
+
+export const allFeedbacksForSessionRef = (sessionId) => firebase.database().ref('feedbacks/' + sessionId);
+
 export const usersRef = userId => firebase.database().ref('users/' + userId);
