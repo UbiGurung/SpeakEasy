@@ -4,10 +4,14 @@ import RoomView from "./containers/RoomView";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import { createBrowserHistory } from 'history';
+
+const history = createBrowserHistory();
+
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <Switch>
           <Route exact path="/">
             <Home />
