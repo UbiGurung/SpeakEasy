@@ -24,7 +24,7 @@ export default function FeedbackControls({ props, handleSubmitVote }) {
                 <Button component={Link} to="/todo">
                     Go to todos
                 </Button>
-                <Button onClick={props.createSession}>Create Sessions</Button>
+                <Button onClick={() => props.createSession("Test")}>Create Sessions</Button>
                 <Button
                     onClick={() =>
                         props.createUser(
@@ -39,6 +39,8 @@ export default function FeedbackControls({ props, handleSubmitVote }) {
                 >
                     Create User test
                 </Button>
+                <Button onClick={() => props.fetchSession("y5928")}>Fetch Session</Button>
+                <Button onClick={() => props.getAllVotesForSession("y5928")}>Get All Votes For Session</Button>
             </ButtonGroup>
         </div>
     );

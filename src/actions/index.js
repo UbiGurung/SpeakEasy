@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
 
-import { todosRef, sessionByIdRef, allSessionsRef, votesRef, usersRef } from '../config/firebase';
+import { todosRef, sessionByIdRef, allSessionsRef, votesRef, usersRef, sessionEnrolmentByIdRef, allVotesForSessionRef } from '../config/firebase';
 import * as actionTypes from './types';
 import * as selectors from '../selectors';
 
@@ -104,19 +104,41 @@ export const fetchSessionsForUser = user => async dispatch => {
     });
 };
 
-export const createSession = ({ title }) => async (dispatch, getState) => {
+export const createSession = (title) => async (dispatch, getState) => {
     const user = selectors.getAuthUser(getState());
     const uniqueId = createRoomCodeID();
 
     sessionByIdRef(uniqueId)
-        .set({ name: title, userId: user.user.uid })
+        .set({ name: title, speakerId: user.user.uid })
         .then(() =>
             dispatch({
                 type: actionTypes.CREATE_SESSION,
-                payload: { sessionId: uniqueId, name: title, userId: user.user.uid }
+                payload: { sessionId: uniqueId, name: title, speakerId: user.user.uid }
             })
         );
+
+    sessionEnrolmentByIdRef(uniqueId).set({
+        Attendees: [],
+        CurrentTimeFrame: 0,
+        isActive: false
+    })
 };
+
+export const fetchSession = (sessionId) => async dispatch => {
+    sessionEnrolmentByIdRef(sessionId).on('value', snapshot => {
+        dispatch({
+            type: actionTypes.FETCH_SESSION_ENROLMENT,
+            payload: snapshot.val()
+        })
+    })
+
+    sessionByIdRef(sessionId).on('value', snapshot => {
+        dispatch({
+            type: actionTypes.FETCH_SESSION,
+            payload: {sessionId, data: snapshot.val()}
+        })
+    })
+}
 
 export const sumbitVote = (voteNumber, timeInterval, sessionId) => async (dispatch, getState) => {
     const user = selectors.getAuthUser(getState());
@@ -127,10 +149,17 @@ export const sumbitVote = (voteNumber, timeInterval, sessionId) => async (dispat
     voteRef.set({ vote: voteNumber }).then(() => {
         dispatch({
             type: actionTypes.SUMBIT_VOTE,
-            payload: { sessionId, userId, voteNumber }
+            payload: { sessionId, userId, voteNumber, timeInterval}
         });
     });
 };
+
+export const getAllVotesForSession = (sessionId) => async dispatch => {
+    allVotesForSessionRef(sessionId).on('value', snapshot => dispatch({
+        type: actionTypes.GET_ALL_VOTES_FOR_SESSION,
+        payload: snapshot.val()
+    }));
+}
 
 export const createUser = (email, password, name, age, gender, roles) => async dispatch => {
     firebase
@@ -140,7 +169,7 @@ export const createUser = (email, password, name, age, gender, roles) => async d
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            if (errorCode == 'auth/weak-password') {
+            if (errorCode === 'auth/weak-password') {
                 alert('The password is too weak.');
             } else {
                 alert(errorMessage);

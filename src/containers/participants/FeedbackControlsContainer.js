@@ -2,23 +2,24 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import FeedbackControls from '../../components/Participants/FeedbackControls';
-import { createSession, sumbitVote, createUser } from '../../actions';
+import * as selectors from '../../selectors';
+import { createSession, sumbitVote, createUser, fetchSession, getAllVotesForSession } from '../../actions';
 
 class FeedbackControlsContainer extends React.Component {
     state = {
         timeInterval: 0
     };
 
-    handleSubmitVote = () => {
-        setInterval(() => {
-            this.setState({ timeInterval: this.state.timeInterval + 1 });
-            this.props.sumbitVote(4, this.state.timeInterval, '2ynpz');
+    componentDidUpdate(prevProps){
+        if(this.props.isSessionActive){
+            console.warn('prevTimeFrame', prevProps.currentTimeFrame)
+            console.warn('nowTimeFrame', this.props.currentTimeFrame)
 
-            if (this.state.timeInterval >= 5) {
-                clearInterval();
+            if(prevProps.currentTimeFrame !== undefined && (prevProps.currentTimeFrame !== this.props.currentTimeFrame)){
+                this.props.sumbitVote(2, this.props.currentTimeFrame, this.props.currentSessionId)
             }
-        }, 5000);
-    };
+        }
+    }
 
     render() {
         return <FeedbackControls props={this.props} handleSubmitVote={this.handleSubmitVote} />;
@@ -27,9 +28,13 @@ class FeedbackControlsContainer extends React.Component {
 
 const mapStateToProps = state => {
     console.warn({state})
-    return {};
+    return {
+        currentTimeFrame: selectors.getSessionTimeInterval(state),
+        currentSessionId: selectors.getCurrentSessionId(state),
+        isSessionActive: selectors.getIsCurrentSessionActive(state)
+    };
 };
 
-export default connect(mapStateToProps, { createSession, sumbitVote, createUser })(
+export default connect(mapStateToProps, { createSession, sumbitVote, createUser, fetchSession, getAllVotesForSession })(
     FeedbackControlsContainer
 );
