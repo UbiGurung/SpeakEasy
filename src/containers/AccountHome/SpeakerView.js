@@ -1,9 +1,9 @@
 import React from "react";
-import SpeakerView from "../components/SpeakerView";
+import SpeakerView from "../../components/SpeakerView";
 import { connect } from "react-redux";
-import { getAuthUser } from "../selectors";
+import { getAuthUser } from "../../selectors";
 
-import { signOut, createSession } from "../actions";
+import { signOut, createSession } from "../../actions";
 
 class SpeakerViewContainer extends React.Component {
   render() {

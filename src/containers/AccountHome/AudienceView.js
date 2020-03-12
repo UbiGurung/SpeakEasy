@@ -1,9 +1,9 @@
 import React from "react";
-import AudienceView from "../components/AudienceView";
+import AudienceView from "../../components/AudienceView";
 import { connect } from "react-redux";
-import { getAuthUser } from "../selectors";
+import { getAuthUser } from "../../selectors";
 
-import { signOut /*joinSession,*/ } from "../actions";
+import { signOut /*joinSession,*/ } from "../../actions";
 
 class AudienceViewContainer extends React.Component {
   render() {
