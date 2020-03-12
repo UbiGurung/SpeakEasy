@@ -4,6 +4,10 @@ import { Link } from "react-router-dom";
 import { theme } from "../config/theme";
 import LoginForm from "../components/LoginForm";
 import { Typography, Button } from "@material-ui/core";
+import {connect} from 'react-redux';
+import {compose} from 'ramda';
+
+import {signInByEmailAndPassword} from '../actions';
 
 const styles = {
   root: {
@@ -56,10 +60,11 @@ class Login extends React.Component {
     !this.state.email && this.setState({ emailError: "email required" });
     !this.state.password && this.setState({ emailError: "password required" });
 
-    // this.state.email && this.state.password && //sendrequest
+    this.state.email && this.state.password && this.props.signInByEmailAndPassword(this.state.email, this.state.password)
   };
 
   render() {
+    console.warn({state: this.props.state})
     const { classes } = this.props;
 
     return (
@@ -91,4 +96,13 @@ class Login extends React.Component {
   }
 }
 
-export default withStyles(styles)(Login);
+const mapStateToProps = state => {
+  return {
+    state
+  };
+};
+
+export default compose(
+  connect(mapStateToProps, {signInByEmailAndPassword}),
+  withStyles(styles)
+)(Login);

@@ -125,6 +125,7 @@ export const createSession = (title) => async (dispatch, getState) => {
 };
 
 export const fetchSession = (sessionId) => async dispatch => {
+    console.warn({sessionId})
     sessionEnrolmentByIdRef(sessionId).on('value', snapshot => {
         dispatch({
             type: actionTypes.FETCH_SESSION_ENROLMENT,
@@ -161,7 +162,8 @@ export const getAllVotesForSession = (sessionId) => async dispatch => {
     }));
 }
 
-export const createUser = (email, password, name, age, gender, roles) => async dispatch => {
+export const createUser = ({email, password, name, age = 12, gender = "Male", roles = ["Speaker"]}) => async dispatch => {
+    console.warn()
     firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
@@ -181,7 +183,6 @@ export const createUser = (email, password, name, age, gender, roles) => async d
                 type: actionTypes.SIGN_IN,
                 payload: authUser
             });
-            console.warn('authUser.user.uid', authUser.user.uid);
             usersRef(authUser.user.uid)
                 .set({
                     name,

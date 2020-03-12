@@ -1,10 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import {connect} from 'react-redux';
+import {compose} from 'ramda';
 
 import { withStyles } from "@material-ui/core/styles";
 import { theme } from "../config/theme";
 import RegisterForm from "../components/RegisterForm";
 import { Typography, Button } from "@material-ui/core";
+
+import {createUser} from '../actions';
 
 const styles = {
   root: {
@@ -16,7 +20,7 @@ const styles = {
   }
 };
 
-class Login extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,7 +44,7 @@ class Login extends React.Component {
     !this.state.password &&
       this.setState({ passwordError: "password required" });
 
-    // this.state.username && this.state.email && this.state.password && //sendrequest
+    this.state.username && this.state.email && this.state.password && this.props.createUser({email:this.state.email, password: this.state.password, name:this.state.username})
   };
 
   render() {
@@ -64,4 +68,13 @@ class Login extends React.Component {
   }
 }
 
-export default withStyles(styles)(Login);
+const mapStateToProps = state => {
+  return {
+    state
+  };
+};
+
+export default compose(
+  connect(mapStateToProps, {createUser}),
+  withStyles(styles)
+)(Register);

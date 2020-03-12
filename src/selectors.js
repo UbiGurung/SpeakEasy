@@ -1,6 +1,7 @@
 import * as R from 'ramda';
 
 export const getAuthUser = state => state.userConfig.authUser;
+export const getUserDetails = state => state.userConfig.userDetails
 
 export const getSessionTimeInterval = state => {
     return state.sessions.currentSessionEnrolment &&

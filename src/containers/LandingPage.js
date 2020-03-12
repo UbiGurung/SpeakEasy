@@ -1,4 +1,6 @@
 import React from "react";
+import {compose} from 'ramda';
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -6,6 +8,9 @@ import { theme } from "../config/theme";
 
 import JoinRoomForm from "../components/AudienceView/JoinRoomForm";
 import { Button, Typography } from "@material-ui/core";
+
+import history from '../history';
+import {fetchSession} from '../actions';
 
 const styles = {
   root: {
@@ -36,7 +41,7 @@ const styles = {
 };
 
 class Home extends React.Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
     this.state = { roomCode: null, error: null };
   }
@@ -53,8 +58,10 @@ class Home extends React.Component {
   };
 
   joinRoom = () => {
-    console.warn({ props: this.props });
-    this.props.history.push("/activeRoom");
+    this.props.fetchSession(this.state.roomCode).then(() => {
+      history.push("/activeRoom/:" + this.state.roomCode)
+      setInterval(() => window.location.reload(false), 500)
+    });
   };
 
   render() {
@@ -83,4 +90,13 @@ class Home extends React.Component {
   }
 }
 
-export default withStyles(styles)(Home);
+const mapStateToProps = state => {
+  return {
+    state
+  };
+};
+
+export default compose(
+  connect(mapStateToProps, {fetchSession}),
+  withStyles(styles)
+)(Home);

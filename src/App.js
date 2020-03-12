@@ -6,10 +6,7 @@ import Login from "./containers/Login";
 import Register from "./containers/Register";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-import { createBrowserHistory } from "history";
-
-const history = createBrowserHistory();
+import history from './history';
 
 class App extends Component {
   render() {
@@ -17,12 +14,12 @@ class App extends Component {
       <Router history={history}>
         <Switch>
           <Route exact path="/">
-            <LandingPage history={history} />
+            <LandingPage />
           </Route>
           <Route exact path="/account">
             <AccountHome />
           </Route>
-          <Route path="/activeRoom">
+          <Route path="/activeRoom/:id">
             <RoomView />
           </Route>
           <Route path="/login">

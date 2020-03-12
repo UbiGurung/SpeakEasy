@@ -6,6 +6,7 @@ import SpeakerDrawer from "../components/RoomView/SpeakerDrawer";
 import AudienceDrawer from "../components/RoomView/AudienceDrawer";
 import { SwipeableDrawer } from "@material-ui/core";
 import { connect } from "react-redux";
+import {compose} from 'ramda';
 import { getAuthUser } from "../selectors";
 
 import { signOut /*joinSession,*/ } from "../actions";
@@ -69,6 +70,7 @@ class RoomViewContainer extends React.Component {
   };
 
   render() {
+    console.warn({state: this.props.state})
     const { classes } = this.props;
 
     const comments = ["so interesting", "amazing", "much wow", "5 stars"];
@@ -112,11 +114,12 @@ class RoomViewContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    authUser: getAuthUser(state)
-    // mode: ////getmode
+    authUser: getAuthUser(state),
+    state
   };
 };
 
-export default connect(mapStateToProps, { /*joinSession,*/ signOut })(
-  withStyles(styles)(RoomViewContainer)
-);
+export default compose(
+  connect(mapStateToProps, {signOut}),
+  withStyles(styles)
+)(RoomViewContainer);

@@ -28,6 +28,7 @@ export default (state = {}, action) => {
 
     case actionTypes.FETCH_SESSION: {
         const {sessionId, data} = action.payload;
+        console.warn({sessionId, data})
         return {
             ...state,
             currentSession: {

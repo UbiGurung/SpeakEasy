@@ -1,7 +1,7 @@
 import React from "react";
 import AccountHeader from "../../components/AccountHeader";
 import { connect } from "react-redux";
-import { getAuthUser } from "../../selectors";
+import { getAuthUser, getUserDetails } from "../../selectors";
 
 import { signOut } from "../../actions";
 
@@ -10,7 +10,7 @@ class AccountContainer extends React.Component {
     return (
       <AccountHeader
         signOut={this.props.signOut}
-        authUser={this.props.authUser}
+        userDetails={this.props.userDetails}
       />
     );
   }
@@ -18,7 +18,7 @@ class AccountContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    authUser: getAuthUser(state)
+    userDetails: getUserDetails(state)
   };
 };
 
