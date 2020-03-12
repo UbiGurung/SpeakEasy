@@ -9,11 +9,15 @@ const styles = {
 };
 
 const AudienceView = props => {
-  const { classes } = props;
+  const { classes, codeError, handleCodeChange, handleJoinRoom } = props;
 
   return (
     <div className={classes.root}>
-      <JoinRoomForm />
+      <JoinRoomForm
+        error={codeError}
+        handleChange={handleCodeChange}
+        handleClick={handleJoinRoom}
+      />
       {/* <img alt="" src={svg} /> */}
       <AttendanceHistory />
     </div>

@@ -27,7 +27,7 @@ const RoomHistory = props => {
       <div>
         {roomHistory.map(room => (
           <div className={classes.roomHistoryCard} key={room.title}>
-            `${room.title} - ${room.date}`
+            {`${room.title} - ${room.date}`}
           </div>
         ))}
       </div>

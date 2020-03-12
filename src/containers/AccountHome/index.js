@@ -1,9 +1,9 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import SwipeableViews from "react-swipeable-views";
-import Account from "../Account";
-import AudienceView from "../AudienceView";
-import SpeakerView from "../SpeakerView";
+import Account from "./Account";
+import AudienceView from "./AudienceView";
+import SpeakerView from "./SpeakerView";
 import { theme } from "../../config/theme";
 
 const styles = {

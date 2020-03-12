@@ -1,9 +1,9 @@
 import React from "react";
-import AccountHeader from "../components/AccountHeader";
+import AccountHeader from "../../components/AccountHeader";
 import { connect } from "react-redux";
-import { getAuthUser } from "../selectors";
+import { getAuthUser } from "../../selectors";
 
-import { signOut } from "../actions";
+import { signOut } from "../../actions";
 
 class AccountContainer extends React.Component {
   render() {
