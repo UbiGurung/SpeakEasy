@@ -8,19 +8,40 @@ export default (state = {}, action) => {
     }
         
     case actionTypes.CREATE_SESSION:{
-        const {sessionId, name, userId} = action.payload
+        const {sessionId, name, speakerId} = action.payload
 
         return{
             ...state,
-            [sessionId]: {name, userId}
+            [sessionId]: {name, speakerId}
         }
     }
         
     case actionTypes.FETCH_ALL_SESSIONS:{
         const {allSessions, userId} = action.payload;
 
-        const filteredSessionsForUser = R.filter((x) => x.userId === userId, allSessions);
-        return filteredSessionsForUser
+        const filteredSessionsForUser = allSessions && R.filter((x) => x.userId === userId, allSessions);
+        return {
+            ...state,
+            filteredSessionsForUser
+        }
+    }
+
+    case actionTypes.FETCH_SESSION: {
+        const {sessionId, data} = action.payload;
+        return {
+            ...state,
+            currentSession: {
+                id: sessionId,
+                details: data
+            }
+        }
+    }
+
+    case actionTypes.FETCH_SESSION_ENROLMENT:{
+        return{
+            ...state,
+            currentSessionEnrolment: action.payload
+        }
     }
         
     default:
