@@ -26,6 +26,7 @@ class FeedbackControlsContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
+    console.warn({state})
     return {};
 };
 

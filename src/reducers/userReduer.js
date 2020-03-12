@@ -2,7 +2,7 @@ import * as actionTypes from '../actions/types';
 
 export default (state = {}, action) => {
     switch (action.type) {
-        case actionTypes.SIGN_IN_ANON:
+        case actionTypes.SIGN_IN:
             return {
                 ...state,
                 authUser: action.payload
@@ -10,8 +10,6 @@ export default (state = {}, action) => {
 
         case actionTypes.SIGN_OUT:
             return {
-                ...state,
-                authUser: null
             };
 
         case actionTypes.CREATE_USER: {
@@ -19,6 +17,13 @@ export default (state = {}, action) => {
                 ...state,
                 userDetails: action.payload
             };
+        }
+
+        case actionTypes.GET_USER: {
+            return{
+                ...state,
+                userDetails: action.payload
+            }
         }
 
         default:

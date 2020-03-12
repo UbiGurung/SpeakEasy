@@ -39,7 +39,7 @@ export const signInAsAnonymousUser = () => async dispatch => {
         })
         .then(authUser => {
             dispatch({
-                type: actionTypes.SIGN_IN_ANON,
+                type: actionTypes.SIGN_IN,
                 payload: authUser
             });
         });
@@ -62,9 +62,11 @@ export const signInByEmailAndPassword = (email, password) => async dispatch => {
         })
         .then(authUser => {
             dispatch({
-                type: actionTypes.SIGN_IN_ANON,
+                type: actionTypes.SIGN_IN,
                 payload: authUser
             });
+
+            dispatch(fetchUser(authUser));
 
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user && !user.isAnonymous) {
@@ -85,6 +87,13 @@ export const signOut = () => async dispatch => {
             })
         );
 };
+
+export const fetchUser = user => async dispatch => {
+    usersRef(user.user.uid).once('value').then((snapshot) => dispatch({
+        type: actionTypes.GET_USER,
+        payload: snapshot.val()
+    }))
+}
 
 export const fetchSessionsForUser = user => async dispatch => {
     allSessionsRef.on('value', snapshot => {
@@ -140,7 +149,7 @@ export const createUser = (email, password, name, age, gender, roles) => async d
         })
         .then(authUser => {
             dispatch({
-                type: actionTypes.SIGN_IN_ANON,
+                type: actionTypes.SIGN_IN,
                 payload: authUser
             });
             console.warn('authUser.user.uid', authUser.user.uid);

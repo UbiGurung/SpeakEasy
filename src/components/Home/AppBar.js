@@ -33,7 +33,7 @@ export default function ButtonAppBar({signInAsAnonymousUser, signInByEmailAndPas
             Speak Easy
           </Typography>
           {authUser ? <Button color="inherit" onClick={signOut}>SignOut</Button> : <><Button color="inherit" onClick={signInAsAnonymousUser}>Login Anon</Button> 
-          <Button color="inherit" onClick={() => signInByEmailAndPassword("speakeremailone@gmail.com", "speakerOne")}>Login</Button></>}
+          <Button color="inherit" onClick={() => signInByEmailAndPassword("testemailone@gmail.com", "password")}>Login</Button></>}
           <Button color="inherit">Register</Button>
         </Toolbar>
       </AppBar>
