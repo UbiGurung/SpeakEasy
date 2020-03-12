@@ -23,7 +23,9 @@ const RoomTemplates = props => {
       <Typography>rooms you are planning</Typography>
       <div>
         {roomTemplates.map(room => (
-          <div className={classes.roomTemplateCard}>{room.title}</div>
+          <div className={classes.roomTemplateCard} key={room.title}>
+            {room.title}{" "}
+          </div>
         ))}
       </div>
     </div>

@@ -26,7 +26,7 @@ const AttendanceHistory = props => {
       <Typography>rooms you attended</Typography>
       <div>
         {roomsHistory.map(room => (
-          <div className={classes.roomHistoryCard}>
+          <div className={classes.roomHistoryCard} key={room.title}>
             {room.title} - {room.date}
           </div>
         ))}

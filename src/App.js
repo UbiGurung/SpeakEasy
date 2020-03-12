@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import Home from "./components/Home/index";
-import List from "./components/List";
-import RoomView from "./components/RoomView";
+import Home from "./containers/Home";
+import RoomView from "./containers/RoomView";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -12,9 +11,6 @@ class App extends Component {
         <Switch>
           <Route exact path="/">
             <Home />
-          </Route>
-          <Route path="/todo">
-            <List />
           </Route>
           <Route path="/activeRoom">
             <RoomView />

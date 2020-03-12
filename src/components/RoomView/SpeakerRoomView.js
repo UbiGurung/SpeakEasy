@@ -23,7 +23,7 @@ const SpeakerRoomView = props => {
       </Typography>
       <div className={classes.commentList}>
         {comments.map(comment => (
-          <Chip label={comment} className={classes.comment} />
+          <Chip label={comment} className={classes.comment} key={comment} />
         ))}
       </div>
     </div>

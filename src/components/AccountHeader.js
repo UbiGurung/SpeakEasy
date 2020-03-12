@@ -1,8 +1,8 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Avatar, Typography } from "@material-ui/core";
-import svg from "../../accountBackdrop.svg";
-import { theme } from "../../config/theme";
+import svg from "../static/accountBackdrop.svg";
+import { theme } from "../config/theme";
 
 const styles = {
   root: {

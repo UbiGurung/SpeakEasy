@@ -26,8 +26,8 @@ const RoomHistory = props => {
       <Typography>rooms you spoke at</Typography>
       <div>
         {roomHistory.map(room => (
-          <div className={classes.roomHistoryCard}>
-            {room.title - room.date}
+          <div className={classes.roomHistoryCard} key={room.title}>
+            `${room.title} - ${room.date}`
           </div>
         ))}
       </div>
