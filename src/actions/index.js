@@ -1,6 +1,6 @@
 import * as firebase from 'firebase';
 
-import { todosRef, sessionByIdRef, allSessionsRef, votesRef, usersRef, sessionEnrolmentByIdRef, allVotesForSessionRef } from '../config/firebase';
+import { todosRef, sessionByIdRef, allSessionsRef, votesRef, usersRef, sessionEnrolmentByIdRef, allVotesForSessionRef, feedbackRef, allFeedbacksForSessionRef } from '../config/firebase';
 import * as actionTypes from './types';
 import * as selectors from '../selectors';
 
@@ -209,4 +209,18 @@ export const startSession = (sessionId) => async dispatch => {
 
 export const endSession = (sessionId) => async dispatch => {
     sessionEnrolmentByIdRef(sessionId).update({isActive: false});
+}
+
+export const submitFeedback = (sessionId, message) => async (dispatch, getState) => {
+    const user = selectors.getAuthUser(getState());
+    const userId = user.user.uid;
+
+    feedbackRef(sessionId, userId, new Date()).set({message: message})
+}
+
+export const getAllFeedbacks = (sessionId) => async dispatch => {
+    allFeedbacksForSessionRef(sessionId).on('value', snapshot => dispatch({
+        type: actionTypes.GET_ALL_FEEDBACKS_FOR_SESSION,
+        payload: snapshot.val()
+    }))
 }
