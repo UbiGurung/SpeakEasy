@@ -9,11 +9,15 @@ const styles = {
 };
 
 const SpeakerView = props => {
-  const { classes } = props;
+  const { classes, form, createRoom, handleFormChange } = props;
 
   return (
     <div className={classes.root}>
-      <CreateRoomForm />
+      <CreateRoomForm
+        form={form}
+        handleSubmit={createRoom}
+        handleChange={handleFormChange}
+      />
       <RoomTemplates />
       <RoomHistory />
     </div>

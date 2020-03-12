@@ -15,13 +15,23 @@ const styles = {
 };
 
 const JoinRoomForm = props => {
-  const { classes } = props;
+  const { classes, error, handleChange, handleClick } = props;
   return (
     <div className={classes.root}>
       <FormControl>
         <Typography>enter code to join room</Typography>
-        <TextField id="outlined-basic" label="room code" variant="outlined" />
-        <Button className={classes.joinRoomButton} variant="outlined">
+        <TextField
+          id="outlined-basic"
+          variant="outlined"
+          error={error}
+          helperText={error}
+          onChange={handleChange}
+        />
+        <Button
+          className={classes.joinRoomButton}
+          variant="outlined"
+          onClick={() => handleClick()}
+        >
           >
         </Button>
       </FormControl>

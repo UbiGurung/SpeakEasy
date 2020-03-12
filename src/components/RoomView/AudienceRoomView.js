@@ -12,16 +12,39 @@ const styles = {
 };
 
 const AudienceRoomView = props => {
-  const { classes } = props;
-
+  const {
+    classes,
+    commentError,
+    handleChange,
+    handleSubmit,
+    handleSlide,
+    emoji,
+    sliderValue
+  } = props;
+  console.warn({ sliderValue });
   return (
     <div className={classes.root}>
       <Typography>Introduction Speech</Typography>
       <Typography>by Sir Speaksalot</Typography>
-      <emoji-slider id="rangeSlider" emoji="😍"></emoji-slider>
+      <emoji-slider
+        id="rangeSlider"
+        emoji={emoji}
+        value={sliderValue}
+        onChange={handleSlide}
+      ></emoji-slider>
       <Typography>your experience in one word</Typography>
-      <TextField id="outlined-basic" variant="outlined" />
-      <Button className={classes.sendFeedbackButton} variant="outlined">
+      <TextField
+        id="outlined-basic"
+        variant="outlined"
+        error={commentError}
+        helperText={commentError}
+        onChange={handleChange}
+      />
+      <Button
+        className={classes.sendFeedbackButton}
+        variant="outlined"
+        onClick={() => handleSubmit()}
+      >
         >
       </Button>
     </div>

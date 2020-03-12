@@ -36,13 +36,34 @@ const styles = {
 };
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { roomCode: null, error: null };
+  }
+
+  handleCodeChange = event => {
+    console.warn({ event });
+    this.setState({ roomCode: event.target.value });
+  };
+
+  handleJoinRoom = () => {
+    this.state.roomCode
+      ? /*this.props.joinRoom(this.state.roomCode)*/ null &&
+        this.setState({ error: null })
+      : this.setState({ error: "please enter code" });
+  };
+
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
         <Typography variant="h3">Speak Easy</Typography>
-        <JoinRoomForm />
+        <JoinRoomForm
+          error={this.state.error}
+          handleChange={this.handleCodeChange}
+          handleClick={this.handleJoinRoom}
+        />
         <div className={classes.divider}>
           <div className={classes.hr} />
           OR

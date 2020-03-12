@@ -38,13 +38,39 @@ const styles = {
 };
 
 class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: null,
+      password: null,
+      emailError: null,
+      passwordError: null
+    };
+  }
+
+  handleChange = (event, target) => {
+    this.setState({ [target]: event.target.value });
+  };
+
+  handleLogin = () => {
+    !this.state.email && this.setState({ emailError: "email required" });
+    !this.state.password && this.setState({ emailError: "password required" });
+
+    // this.state.email && this.state.password && //sendrequest
+  };
+
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.root}>
         <Typography variant="h3">Speak Easy</Typography>
-        <LoginForm />
+        <LoginForm
+          emailError={this.state.emailError}
+          passwordError={this.state.passwordError}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleLogin}
+        />
         <div className={classes.divider}>
           <div className={classes.hr} />
           OR
