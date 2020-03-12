@@ -48,9 +48,13 @@ class Home extends React.Component {
 
   handleJoinRoom = () => {
     this.state.roomCode
-      ? /*this.props.joinRoom(this.state.roomCode)*/ null &&
-        this.setState({ error: null })
+      ? this.joinRoom() && this.setState({ error: null })
       : this.setState({ error: "please enter code" });
+  };
+
+  joinRoom = () => {
+    console.warn({ props: this.props });
+    this.props.history.push("/activeRoom");
   };
 
   render() {

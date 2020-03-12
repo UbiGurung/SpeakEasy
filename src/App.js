@@ -7,7 +7,7 @@ import Register from "./containers/Register";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory } from "history";
 
 const history = createBrowserHistory();
 
@@ -17,7 +17,7 @@ class App extends Component {
       <Router history={history}>
         <Switch>
           <Route exact path="/">
-            <LandingPage />
+            <LandingPage history={history} />
           </Route>
           <Route exact path="/account">
             <AccountHome />
