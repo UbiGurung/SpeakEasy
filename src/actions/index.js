@@ -197,3 +197,16 @@ export const createUser = (email, password, name, age, gender, roles) => async d
                 });
         });
 };
+
+export const setSessionTimeFrame = (sessionId, timeFrameNumber) => async dispatch => {
+    sessionEnrolmentByIdRef(sessionId).update({CurrentTimeFrame: timeFrameNumber});
+}
+
+export const startSession = (sessionId) => async dispatch => {
+    console.warn({sessionId})
+    sessionEnrolmentByIdRef(sessionId).update({isActive: true});
+}
+
+export const endSession = (sessionId) => async dispatch => {
+    sessionEnrolmentByIdRef(sessionId).update({isActive: false});
+}
