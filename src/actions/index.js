@@ -1,6 +1,6 @@
 import * as firebase from "firebase";
 
-import { todosRef, sessionByIdRef, allSessionsRef } from "../config/firebase";
+import { todosRef, sessionByIdRef, allSessionsRef, votesRef } from "../config/firebase";
 import * as actionTypes from "./types";
 import * as selectors from "../selectors";
 
@@ -108,3 +108,17 @@ export const createSession = () => async (dispatch, getState) => {
       })
     );
 };
+
+export const sumbitVote = (voteNumber, timeInterval, sessionId) => async (dispatch, getState) => {
+  const user = selectors.getAuthUser(getState());
+  const userId = user.user.uid;
+
+  const voteRef = votesRef(sessionId, userId, timeInterval);
+
+  voteRef.set({vote: voteNumber}).then(() => {
+    dispatch({
+      type: actionTypes.SUMBIT_VOTE,
+      payload: {sessionId, userId, voteNumber}
+    })
+  })
+}

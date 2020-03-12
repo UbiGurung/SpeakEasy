@@ -17,7 +17,6 @@ export default (state = {}, action) => {
     }
         
     case actionTypes.FETCH_ALL_SESSIONS:{
-        console.warn('allSessions', action.payload)
         const {allSessions, userId} = action.payload;
 
         const filteredSessionsForUser = R.filter((x) => x.userId === userId, allSessions);

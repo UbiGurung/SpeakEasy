@@ -16,14 +16,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function FeedbackControls({createSession}) {
+export default function FeedbackControls({props, handleSubmitVote}) {
+
+
   const classes = useStyles();
   return (
     <div className={classes.root}>
       <ButtonGroup variant="text" color="primary" aria-label="text primary button group">
         <Button component={Link} to="/todo">Go to todos</Button>
-        <Button onClick={createSession}>Create Sessions</Button>
-        <Button>Three</Button>
+        <Button onClick={props.createSession}>Create Sessions</Button>
+        <Button onClick={handleSubmitVote}>Sumbit Vote Test</Button>
       </ButtonGroup>
     </div>
   );
