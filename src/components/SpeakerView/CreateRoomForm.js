@@ -1,14 +1,35 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
+import { FormControl, Typography, TextField, Button } from "@material-ui/core";
+import { theme } from "../../config/theme";
 
-const useStyles = makeStyles(theme => ({
-  root: {}
-}));
+const styles = {
+  root: { margin: "24px" },
+  createRoomButton: {
+    width: "fit-content",
+    alignSelf: "flex-end",
+    background: theme.colours.accent
+  }
+};
 
-function CreateRoomForm() {
-  const classes = useStyles();
+const CreateRoomForm = props => {
+  const { classes } = props;
+  return (
+    <div className={classes.root}>
+      <FormControl>
+        <Typography>create new room</Typography>
+        <TextField id="outlined-basic" label="room title" variant="outlined" />
+        <TextField
+          id="outlined-basic"
+          label="room speaker"
+          variant="outlined"
+        />
+        <Button className={classes.createRoomButton} variant="outlined">
+          >
+        </Button>
+      </FormControl>
+    </div>
+  );
+};
 
-  return <div className={classes.root}>Create Room Form</div>;
-}
-
-export default CreateRoomForm;
+export default withStyles(styles)(CreateRoomForm);

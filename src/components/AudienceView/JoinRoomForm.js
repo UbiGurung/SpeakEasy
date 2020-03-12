@@ -1,13 +1,32 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
+import { FormControl, Typography, TextField, Button } from "@material-ui/core";
+import { theme } from "../../config/theme";
 
-const useStyles = makeStyles(theme => ({
-  root: {}
-}));
+const styles = {
+  root: {
+    margin: "24px"
+  },
+  joinRoomButton: {
+    width: "fit-content",
+    alignSelf: "flex-end",
+    background: theme.colours.accent
+  }
+};
 
-function JoinRoomForm() {
-  const classes = useStyles();
-  return <div className={classes.root}>Join Room Form</div>;
-}
+const JoinRoomForm = props => {
+  const { classes } = props;
+  return (
+    <div className={classes.root}>
+      <FormControl>
+        <Typography>enter code to join room</Typography>
+        <TextField id="outlined-basic" label="room code" variant="outlined" />
+        <Button className={classes.joinRoomButton} variant="outlined">
+          >
+        </Button>
+      </FormControl>
+    </div>
+  );
+};
 
-export default JoinRoomForm;
+export default withStyles(styles)(JoinRoomForm);

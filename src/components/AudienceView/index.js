@@ -1,21 +1,23 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import AttendanceHistory from "./";
-import JoinRoomForm from "./";
+import { withStyles } from "@material-ui/core/styles";
+import AttendanceHistory from "./AttendanceHistory";
+import JoinRoomForm from "./JoinRoomForm";
+import svg from "../../divider.svg";
 
-const useStyles = makeStyles(theme => ({
-  root: {}
-}));
+const styles = {
+  root: { textAlign: "center", minHeight: "75vh" }
+};
 
-function AudienceView() {
-  const classes = useStyles();
+const AudienceView = props => {
+  const { classes } = props;
 
   return (
     <div className={classes.root}>
       <JoinRoomForm />
+      {/* <img alt="" src={svg} /> */}
       <AttendanceHistory />
     </div>
   );
-}
+};
 
-export default AudienceView;
+export default withStyles(styles)(AudienceView);

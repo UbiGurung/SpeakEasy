@@ -1,15 +1,15 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import CreateRoomForm from "./";
-import RoomHistory from "./";
-import RoomTemplates from "./";
+import { withStyles } from "@material-ui/core/styles";
+import CreateRoomForm from "./CreateRoomForm";
+import RoomHistory from "./RoomHistory";
+import RoomTemplates from "./RoomTemplates";
 
-const useStyles = makeStyles(theme => ({
-  root: {}
-}));
+const styles = {
+  root: { textAlign: "center", minHeight: "75vh" }
+};
 
-function SpeakerView() {
-  const classes = useStyles();
+const SpeakerView = props => {
+  const { classes } = props;
 
   return (
     <div className={classes.root}>
@@ -18,6 +18,6 @@ function SpeakerView() {
       <RoomHistory />
     </div>
   );
-}
+};
 
-export default SpeakerView;
+export default withStyles(styles)(SpeakerView);

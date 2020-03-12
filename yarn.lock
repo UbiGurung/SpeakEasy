@@ -1113,6 +1113,13 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
+"@polymer/polymer@^3.1.0":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@polymer/polymer/-/polymer-3.3.1.tgz#9ad48992d2a96775f80b0673f3a615d6df8a3dfc"
+  integrity sha512-8KaB48tzyMjdsHdxo5KvCAaqmTe7rYDzQAoj/pyEfq9Fp4YfUaS+/xqwYj0GbiDAUNzwkmEQ7dw9cgnRNdKO8A==
+  dependencies:
+    "@webcomponents/shadycss" "^1.9.1"
+
 "@svgr/core@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@svgr/core/-/core-2.4.1.tgz#03a407c28c4a1d84305ae95021e8eabfda8fa731"
@@ -1309,6 +1316,11 @@
     "@webassemblyjs/ast" "1.7.6"
     "@webassemblyjs/wast-parser" "1.7.6"
     "@xtuc/long" "4.2.1"
+
+"@webcomponents/shadycss@^1.9.1":
+  version "1.9.5"
+  resolved "https://registry.yarnpkg.com/@webcomponents/shadycss/-/shadycss-1.9.5.tgz#52672a34c18bb6dcdc95d1aa288015b2a75cd678"
+  integrity sha512-ivJ47Gq4WJONLErim7FR1TGIX0epNx8b2N9Q7c4AKKd5Mbax+CoKoFLZ2lfFvx8vs/jz1YK+8UIbM+diSy27HQ==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
@@ -3482,6 +3494,14 @@ emoji-regex@^6.5.1:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-6.5.1.tgz#9baea929b155565c11ea41c6626eaa65cef992c2"
   integrity sha512-PAHp6TxrCy7MGMFidro8uikr+zlJJKJ/Q6mm2ExZ7HwkyR9lSVFfE3kt36qcwa24BQL7y0G9axycGjK1A/0uNQ==
+
+emoji-slider@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/emoji-slider/-/emoji-slider-0.2.0.tgz#0f369feb281f9527131ff04ee9b57f7b65ac0bf9"
+  integrity sha512-sMHjy5Uf4w5Crc26HwPBlX0o6LNpSdI3INcxKThX8TfzWear9W9nRuCB4Vevj265s5ZMqviMVvOnZooAf8dttw==
+  dependencies:
+    "@polymer/polymer" "^3.1.0"
+    lit-element "^2.0.1"
 
 emojis-list@^2.0.0:
   version "2.1.0"
@@ -6222,6 +6242,18 @@ levn@^0.3.0, levn@~0.3.0:
   dependencies:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
+
+lit-element@^2.0.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/lit-element/-/lit-element-2.2.1.tgz#79c94d8cfdc2d73b245656e37991bd1e4811d96f"
+  integrity sha512-ipDcgQ1EpW6Va2Z6dWm79jYdimVepO5GL0eYkZrFvdr0OD/1N260Q9DH+K5HXHFrRoC7dOg+ZpED2XE0TgGdXw==
+  dependencies:
+    lit-html "^1.0.0"
+
+lit-html@^1.0.0:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/lit-html/-/lit-html-1.1.2.tgz#2e3560a7075210243649c888ad738eaf0daa8374"
+  integrity sha512-FFlUMKHKi+qG1x1iHNZ1hrtc/zHmfYTyrSvs3/wBTvaNtpZjOZGWzU7efGYVpgp6KvWeKF6ql9/KsCq6Z/mEDA==
 
 load-json-file@^1.0.0:
   version "1.1.0"

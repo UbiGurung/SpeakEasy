@@ -1,13 +1,33 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
+import { Typography } from "@material-ui/core";
+import { theme } from "../../config/theme";
 
-const useStyles = makeStyles(theme => ({
-  root: {}
-}));
+const styles = {
+  root: {
+    margin: "24px"
+  },
+  roomTemplateCard: {
+    background: theme.colours.accent,
+    margin: "12px"
+  }
+};
 
-function RoomTemplates() {
-  const classes = useStyles();
-  return <div className={classes.root}>Room Templates</div>;
-}
+const RoomTemplates = props => {
+  const { classes } = props;
 
-export default RoomTemplates;
+  const roomTemplates = [{ title: "ADA speech" }, { title: "Pep talk" }];
+
+  return (
+    <div className={classes.root}>
+      <Typography>rooms you are planning</Typography>
+      <div>
+        {roomTemplates.map(room => (
+          <div className={classes.roomTemplateCard}>{room.title}</div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default withStyles(styles)(RoomTemplates);
