@@ -1,12 +1,8 @@
-import React, {Component} from 'react';
-import Home from './containers/Home';
-import List from './components/List';
+import React, { Component } from "react";
+import Home from "./containers/Home";
+import RoomView from "./containers/RoomView";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 class App extends Component {
   render() {
@@ -16,8 +12,8 @@ class App extends Component {
           <Route exact path="/">
             <Home />
           </Route>
-          <Route path="/todo">
-            <List />
+          <Route path="/activeRoom">
+            <RoomView />
           </Route>
         </Switch>
       </Router>
