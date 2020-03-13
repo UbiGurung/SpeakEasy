@@ -1,4 +1,6 @@
 import React from "react";
+import {compose} from 'ramda';
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 
@@ -7,6 +9,10 @@ import { theme } from "../config/theme";
 import JoinRoomForm from "../components/AudienceView/JoinRoomForm";
 import { Button } from "@material-ui/core";
 import svg from "../static/speakEasyHeader.svg";
+
+import history from '../history';
+import {fetchSession} from '../actions';
+import * as selectors from '../selectors';
 
 const styles = {
   root: {
@@ -43,7 +49,6 @@ class Home extends React.Component {
   }
 
   handleCodeChange = event => {
-    console.warn({ event });
     this.setState({ roomCode: event.target.value });
   };
 
@@ -54,9 +59,17 @@ class Home extends React.Component {
   };
 
   joinRoom = () => {
-    console.warn({ props: this.props });
-    this.props.history.push("/activeRoom");
+    this.props.fetchSession(this.state.roomCode)
   };
+
+  componentDidUpdate(prevProps){
+    // if(!this.props.isSessionActive){
+    //   alert("Unavailable to join session")
+    // }
+    if(this.props.isSessionActive){
+      history.push("/activeRoom")
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -84,4 +97,13 @@ class Home extends React.Component {
   }
 }
 
-export default withStyles(styles)(Home);
+const mapStateToProps = state => {
+  return {
+    isSessionActive: selectors.getIsCurrentSessionActive(state)
+  };
+};
+
+export default compose(
+  connect(mapStateToProps, {fetchSession}),
+  withStyles(styles)
+)(Home);

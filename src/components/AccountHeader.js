@@ -29,7 +29,7 @@ const AccountHeader = props => {
         S
       </Avatar>
       <Typography className={classes.text} variant="h4">
-        Sir Speaksalot
+        {props.userDetails && props.userDetails.name}
       </Typography>
     </div>
   );

@@ -3,6 +3,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { Typography, Chip, Button } from "@material-ui/core";
 import { theme } from "../../config/theme";
 
+import SocialRoomTemperatureChart from '../Chart/SocialRoomTemperatureChart';
+
 const styles = {
   root: { margin: "24px" },
   commentList: { display: "inline-grid" },
@@ -14,12 +16,21 @@ const styles = {
   }
 };
 
-const SpeakerRoomView = props => {
-  const { classes, comments, handleCancelRoom, handleCloseRoom } = props;
+class SpeakerRoomView extends React.Component{
+  componentDidMount(){
+    let timeFrame = 1;
+    setInterval(() => {
+      this.props.setSessionTimeFrame(this.props.sessionDetails.id, timeFrame);
+      timeFrame++
+    }, 10000)
+  }
 
-  return (
-    <div className={classes.root}>
-      <Typography variant="h3">2:45</Typography>
+  render(){
+    const { classes, comments, handleCloseRoom, sessionDetails } = this.props;
+
+    return(
+      <div className={classes.root}>
+      <Typography variant="h3">{sessionDetails.id}</Typography>
       <Typography variant="h1">
         <span role="img" aria-label="emoji">
           😍
@@ -31,9 +42,9 @@ const SpeakerRoomView = props => {
         ))}
       </div>
       <div>
-        <Button variant="outlined" onClick={() => handleCancelRoom()}>
-          Cancel
-        </Button>
+        <SocialRoomTemperatureChart />
+      </div>
+      <div>
         <Button
           className={classes.button}
           variant="outlined"
@@ -43,7 +54,8 @@ const SpeakerRoomView = props => {
         </Button>
       </div>
     </div>
-  );
-};
+    )
+  }
+}
 
 export default withStyles(styles)(SpeakerRoomView);

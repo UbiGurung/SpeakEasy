@@ -4,8 +4,6 @@ import { todosRef, sessionByIdRef, allSessionsRef, votesRef, usersRef, sessionEn
 import * as actionTypes from './types';
 import * as selectors from '../selectors';
 
-import { createRoomCodeID } from '../Helpers';
-
 export const addToDo = newToDo => async dispatch => {
     todosRef.push().set(newToDo);
 };
@@ -104,23 +102,23 @@ export const fetchSessionsForUser = user => async dispatch => {
     });
 };
 
-export const createSession = (title) => async (dispatch, getState) => {
+export const createSession = (title, isActive, sessionId) => async (dispatch, getState) => {
     const user = selectors.getAuthUser(getState());
-    const uniqueId = createRoomCodeID();
+    const date = new Date();
 
-    sessionByIdRef(uniqueId)
-        .set({ name: title, speakerId: user.user.uid })
+    sessionByIdRef(sessionId)
+        .set({ name: title, speakerId: user.user.uid, date: date })
         .then(() =>
             dispatch({
                 type: actionTypes.CREATE_SESSION,
-                payload: { sessionId: uniqueId, name: title, speakerId: user.user.uid }
+                payload: { sessionId, name: title, speakerId: user.user.uid, date}
             })
         );
 
-    sessionEnrolmentByIdRef(uniqueId).set({
+    sessionEnrolmentByIdRef(sessionId).set({
         Attendees: [],
         CurrentTimeFrame: 0,
-        isActive: false
+        isActive
     })
 };
 
@@ -161,7 +159,7 @@ export const getAllVotesForSession = (sessionId) => async dispatch => {
     }));
 }
 
-export const createUser = (email, password, name, age, gender, roles) => async dispatch => {
+export const createUser = ({email, password, name, age = 12, gender = "Male", roles = ["Speaker"]}) => async dispatch => {
     firebase
         .auth()
         .createUserWithEmailAndPassword(email, password)
@@ -181,7 +179,6 @@ export const createUser = (email, password, name, age, gender, roles) => async d
                 type: actionTypes.SIGN_IN,
                 payload: authUser
             });
-            console.warn('authUser.user.uid', authUser.user.uid);
             usersRef(authUser.user.uid)
                 .set({
                     name,
@@ -203,7 +200,6 @@ export const setSessionTimeFrame = (sessionId, timeFrameNumber) => async dispatc
 }
 
 export const startSession = (sessionId) => async dispatch => {
-    console.warn({sessionId})
     sessionEnrolmentByIdRef(sessionId).update({isActive: true});
 }
 

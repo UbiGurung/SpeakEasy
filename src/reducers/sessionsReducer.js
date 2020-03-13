@@ -8,18 +8,19 @@ export default (state = {}, action) => {
     }
         
     case actionTypes.CREATE_SESSION:{
-        const {sessionId, name, speakerId} = action.payload
+        const {sessionId, name, speakerId, date} = action.payload
 
         return{
             ...state,
-            [sessionId]: {name, speakerId}
+            [sessionId]: {name, speakerId, date}
         }
     }
         
     case actionTypes.FETCH_ALL_SESSIONS:{
         const {allSessions, userId} = action.payload;
 
-        const filteredSessionsForUser = allSessions && R.filter((x) => x.userId === userId, allSessions);
+        const filteredSessionsForUser = allSessions && R.filter((x) => x.speakerId === userId, allSessions);
+
         return {
             ...state,
             filteredSessionsForUser

@@ -1,6 +1,7 @@
-import * as R from 'ramda';
+import moment from 'moment';
 
 export const getAuthUser = state => state.userConfig.authUser;
+export const getUserDetails = state => state.userConfig.userDetails
 
 export const getSessionTimeInterval = state => {
     return state.sessions.currentSessionEnrolment &&
@@ -15,6 +16,10 @@ export const getIsCurrentSessionActive = state => {
 export const getCurrentSessionId = state => {
     return state.sessions.currentSession &&
     state.sessions.currentSession.id
+}
+
+export const getCurrentSessionDetails = (state) => {
+    return state.sessions.currentSession
 }
 
 export const getChartDataForAllVotes = state => {
@@ -37,7 +42,21 @@ export const getChartDataForAllVotes = state => {
             }
         }
 
-        return summaryVotes;
+        const averagedVotes = summaryVotes.map(x => x/allVotes.length);
+
+        return averagedVotes;
     }
     return []
+}
+
+export const getSessionsForUser = state => {
+    const filteredSessions = state.sessions.filteredSessionsForUser;
+    const result = []
+
+    let index = 0;
+    for (var key in filteredSessions){
+        result[index] = {id: key, title: filteredSessions[key].name, date: moment(filteredSessions[key].date).format("MMM Do YY")}
+        index++
+    }
+    return result
 }

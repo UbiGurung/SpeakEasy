@@ -13,19 +13,16 @@ const styles = {
   }
 };
 
-const RoomHistory = props => {
-  const { classes } = props;
+const RoomHistory = (props) => {
+  const { classes, sessionsForUser } = props;
 
-  const roomHistory = [
-    { title: "ADA speech", date: "20th Jan" },
-    { title: "Pep talk", date: "23rd Feb" }
-  ];
+  console.warn({sessionsForUser})
 
   return (
     <div className={classes.root}>
-      <Typography>rooms you spoke at</Typography>
+      <Typography>Rooms you spoke at</Typography>
       <div>
-        {roomHistory.map(room => (
+        {sessionsForUser.map(room => (
           <div className={classes.roomHistoryCard} key={room.title}>
             {`${room.title} - ${room.date}`}
           </div>

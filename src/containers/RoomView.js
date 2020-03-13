@@ -6,9 +6,12 @@ import SpeakerDrawer from "../components/RoomView/SpeakerDrawer";
 import AudienceDrawer from "../components/RoomView/AudienceDrawer";
 import { SwipeableDrawer } from "@material-ui/core";
 import { connect } from "react-redux";
-import { getAuthUser } from "../selectors";
+import {compose} from 'ramda';
+import * as selectors from "../selectors";
 
-import { signOut /*joinSession,*/ } from "../actions";
+import { signOut, endSession, setSessionTimeFrame, getAllVotesForSession } from "../actions";
+
+import history from '../history';
 
 const styles = {
   root: { textAlign: "center" }
@@ -38,9 +41,7 @@ class RoomViewContainer extends React.Component {
     this.setState({ isDrawerOpen: open });
   };
 
-  handleCancelRoom = () => {};
-
-  handleCloseRoom = () => {};
+  handleCloseRoom = () => {this.props.endSession(this.props.currentSessionDetails.id).then(() => history.push("/account"))};
 
   handleChangeComment = event => {
     this.setState({ comment: event.target.value });
@@ -75,13 +76,16 @@ class RoomViewContainer extends React.Component {
     const comments = ["so interesting", "amazing", "much wow", "5 stars"];
     let emoji = this.getEmoji();
 
+    const isSpeaker = this.props.authDetails && (this.props.authDetails.user.uid === this.props.currentSessionDetails.details.speakerId);
+
     return (
       <div className={classes.root}>
-        {this.state.mode === "speaker" ? (
+        {isSpeaker ? (
           <SpeakerRoomView
             comments={comments}
-            handleCancelRoom={this.handleCancelRoom}
             handleCloseRoom={this.handleCloseRoom}
+            sessionDetails={this.props.currentSessionDetails}
+            setSessionTimeFrame={this.props.setSessionTimeFrame}
           />
         ) : (
           <AudienceRoomView
@@ -97,7 +101,7 @@ class RoomViewContainer extends React.Component {
           onClose={this.toggleDrawer(false)}
           onOpen={this.toggleDrawer(true)}
         >
-          {this.state.mode === "speaker" ? (
+          {isSpeaker ? (
             <SpeakerDrawer />
           ) : (
             <AudienceDrawer />
@@ -108,13 +112,16 @@ class RoomViewContainer extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    authUser: getAuthUser(state)
-    // mode: ////getmode
+    authDetails: selectors.getAuthUser(state),
+    currentSessionDetails: selectors.getCurrentSessionDetails(state),
+    isSessionActive: selectors.getIsCurrentSessionActive(state),
+    timeInterval: selectors.getSessionTimeInterval(state),
   };
 };
 
-export default connect(mapStateToProps, { /*joinSession,*/ signOut })(
-  withStyles(styles)(RoomViewContainer)
-);
+export default compose(
+  connect(mapStateToProps, {signOut, endSession, setSessionTimeFrame, getAllVotesForSession}),
+  withStyles(styles)
+)(RoomViewContainer);
