@@ -107,7 +107,7 @@ export const createSession = (title, isActive, sessionId) => async (dispatch, ge
     const date = new Date();
 
     sessionByIdRef(sessionId)
-        .set({ name: title, speakerId: user.user.uid, date })
+        .set({ name: title, speakerId: user.user.uid, date: date })
         .then(() =>
             dispatch({
                 type: actionTypes.CREATE_SESSION,

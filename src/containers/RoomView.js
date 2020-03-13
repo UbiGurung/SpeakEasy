@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import {compose} from 'ramda';
 import * as selectors from "../selectors";
 
-import { signOut, endSession } from "../actions";
+import { signOut, endSession, setSessionTimeFrame, getAllVotesForSession } from "../actions";
 
 import history from '../history';
 
@@ -85,6 +85,7 @@ class RoomViewContainer extends React.Component {
             comments={comments}
             handleCloseRoom={this.handleCloseRoom}
             sessionDetails={this.props.currentSessionDetails}
+            setSessionTimeFrame={this.props.setSessionTimeFrame}
           />
         ) : (
           <AudienceRoomView
@@ -116,11 +117,13 @@ class RoomViewContainer extends React.Component {
 const mapStateToProps = (state) => {
   return {
     authDetails: selectors.getAuthUser(state),
-    currentSessionDetails: selectors.getCurrentSessionDetails(state)
+    currentSessionDetails: selectors.getCurrentSessionDetails(state),
+    isSessionActive: selectors.getIsCurrentSessionActive(state),
+    timeInterval: selectors.getSessionTimeInterval(state),
   };
 };
 
 export default compose(
-  connect(mapStateToProps, {signOut, endSession}),
+  connect(mapStateToProps, {signOut, endSession, setSessionTimeFrame, getAllVotesForSession}),
   withStyles(styles)
 )(RoomViewContainer);

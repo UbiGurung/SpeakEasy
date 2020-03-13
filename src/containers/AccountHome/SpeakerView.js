@@ -20,8 +20,10 @@ class SpeakerViewContainer extends React.Component {
     };
   }
 
-  componentDidMount(){
-    this.props.fetchSessionsForUser(this.props.authUser.user)
+  componentDidUpdate(prevProps){
+    if(prevProps.authUser === undefined && this.props.authUser){
+      this.props.fetchSessionsForUser(this.props.authUser.user)
+    }
   }
 
   handleFormChange = (event, target) => {

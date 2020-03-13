@@ -19,7 +19,8 @@ export default (state = {}, action) => {
     case actionTypes.FETCH_ALL_SESSIONS:{
         const {allSessions, userId} = action.payload;
 
-        const filteredSessionsForUser = allSessions && R.filter((x) => x.userId === userId, allSessions);
+        const filteredSessionsForUser = allSessions && R.filter((x) => x.speakerId === userId, allSessions);
+
         return {
             ...state,
             filteredSessionsForUser
