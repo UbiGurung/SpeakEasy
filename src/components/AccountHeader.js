@@ -3,6 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Avatar, Typography } from "@material-ui/core";
 import svg from "../static/4.svg";
 import { theme } from "../config/theme";
+import svgavatar from "../static/019-cocktails-21.svg";
 
 const styles = {
   root: {
@@ -17,6 +18,10 @@ const styles = {
   },
   text: {
     color: theme.colours.accent
+  },
+  icon: {
+    height: "86px",
+    marginBottom: "40px"
   }
 };
 
@@ -25,9 +30,7 @@ const AccountHeader = props => {
   return (
     <div className={classes.root}>
       <img src="url(./accountBackdrop.svg)" alt="" />
-      <Avatar alt="Remy Sharp" className={classes.large}>
-        S
-      </Avatar>
+      <img className={classes.icon} alt="" src={svgavatar} />
       <Typography className={classes.text} variant="h4">
         {props.userDetails && props.userDetails.name}
       </Typography>

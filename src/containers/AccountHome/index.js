@@ -21,8 +21,8 @@ class Home extends React.Component {
       <div className={classes.root}>
         <Account />
         <SwipeableViews>
-          <AudienceView />
           <SpeakerView />
+          <AudienceView />
         </SwipeableViews>
       </div>
     );

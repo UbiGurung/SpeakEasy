@@ -44,7 +44,7 @@ const styles = {
   }
 };
 
-class Home extends React.Component {
+class JoinAnonym extends React.Component {
   constructor(props) {
     super(props);
     this.state = { roomCode: null, error: null };
@@ -106,4 +106,4 @@ const mapStateToProps = state => {
 export default compose(
   connect(mapStateToProps, { fetchSession }),
   withStyles(styles)
-)(Home);
+)(JoinAnonym);

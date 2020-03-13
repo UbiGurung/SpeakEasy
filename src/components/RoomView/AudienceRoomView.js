@@ -7,7 +7,10 @@ const styles = {
   root: { margin: "24px" },
   sendFeedbackButton: {
     width: "fit-content",
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
+    background: theme.colours.accent,
+    fontWeight: "700",
+    color: theme.colours.text
   }
 };
 
@@ -83,7 +86,6 @@ const AudienceRoomView = props => {
       />
       <Button
         className={classes.sendFeedbackButton}
-        variant="outlined"
         onClick={() => handleSubmit()}
       >
         >

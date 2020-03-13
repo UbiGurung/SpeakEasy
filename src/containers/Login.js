@@ -28,7 +28,7 @@ const styles = {
   },
   hr: {
     width: "35vw",
-    height: "6px",
+    height: "2px",
     background: theme.colours.orange,
     margin: "12px"
   },
@@ -36,6 +36,8 @@ const styles = {
     width: "fit-content",
     alignSelf: "flex-end",
     background: theme.colours.accent,
+    fontWeight: "700",
+    color: theme.colours.text,
     marginBottom: "24px"
   },
   actionButtons: {
@@ -85,17 +87,15 @@ class Login extends React.Component {
         />
         <div className={classes.divider}>
           <div className={classes.hr} />
-          OR
+          or
           <div className={classes.hr} />
         </div>
         <div className={classes.actionButtons}>
           <Link to="/register">
-            <Button variant="outlined" className={classes.registerButton}>
-              Create Account
-            </Button>
+            <Button className={classes.registerButton}>Create Account</Button>
           </Link>
           <Link to="/">
-            <Button variant="outlined">Cancel</Button>
+            <Button>Cancel</Button>
           </Link>
         </div>
       </div>

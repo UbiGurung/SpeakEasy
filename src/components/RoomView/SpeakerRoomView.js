@@ -3,7 +3,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { Typography, Chip, Button } from "@material-ui/core";
 import { theme } from "../../config/theme";
 
-import SocialRoomTemperatureChart from '../Chart/SocialRoomTemperatureChart';
+import SocialRoomTemperatureChart from "../Chart/SocialRoomTemperatureChart";
 
 const styles = {
   root: { margin: "24px" },
@@ -12,49 +12,47 @@ const styles = {
   button: {
     width: "fit-content",
     alignSelf: "flex-end",
-    background: theme.colours.accent
+    background: theme.colours.accent,
+    fontWeight: "700",
+    color: theme.colours.text
   }
 };
 
-class SpeakerRoomView extends React.Component{
-  componentDidMount(){
+class SpeakerRoomView extends React.Component {
+  componentDidMount() {
     let timeFrame = 1;
     setInterval(() => {
       this.props.setSessionTimeFrame(this.props.sessionDetails.id, timeFrame);
-      timeFrame++
-    }, 10000)
+      timeFrame++;
+    }, 10000);
   }
 
-  render(){
+  render() {
     const { classes, comments, handleCloseRoom, sessionDetails } = this.props;
 
-    return(
+    return (
       <div className={classes.root}>
-      <Typography variant="h3">{sessionDetails.id}</Typography>
-      <Typography variant="h1">
-        <span role="img" aria-label="emoji">
-          😍
-        </span>
-      </Typography>
-      <div className={classes.commentList}>
-        {comments.map(comment => (
-          <Chip label={comment} className={classes.comment} key={comment} />
-        ))}
+        <Typography variant="h3">{sessionDetails.id}</Typography>
+        <Typography variant="h1">
+          <span role="img" aria-label="emoji">
+            😍
+          </span>
+        </Typography>
+        <div className={classes.commentList}>
+          {comments.map(comment => (
+            <Chip label={comment} className={classes.comment} key={comment} />
+          ))}
+        </div>
+        <div>
+          <SocialRoomTemperatureChart />
+        </div>
+        <div>
+          <Button className={classes.button} onClick={() => handleCloseRoom()}>
+            Close Room
+          </Button>
+        </div>
       </div>
-      <div>
-        <SocialRoomTemperatureChart />
-      </div>
-      <div>
-        <Button
-          className={classes.button}
-          variant="outlined"
-          onClick={() => handleCloseRoom()}
-        >
-          Close Room
-        </Button>
-      </div>
-    </div>
-    )
+    );
   }
 }
 
