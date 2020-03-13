@@ -2,7 +2,6 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import AttendanceHistory from "./AttendanceHistory";
 import JoinRoomForm from "./JoinRoomForm";
-import svg from "../../static/divider.svg";
 
 const styles = {
   root: { textAlign: "center", minHeight: "75vh" }
@@ -18,7 +17,6 @@ const AudienceView = props => {
         handleChange={handleCodeChange}
         handleClick={handleJoinRoom}
       />
-      {/* <img alt="" src={svg} /> */}
       <AttendanceHistory />
     </div>
   );

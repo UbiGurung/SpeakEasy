@@ -3,7 +3,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { theme } from "../config/theme";
 import LoginForm from "../components/LoginForm";
-import { Typography, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import svg from "../static/speakEasyHeader.svg";
 
 const styles = {
   root: {
@@ -11,7 +12,7 @@ const styles = {
     color: theme.colours.text,
     textAlign: "center",
     minHeight: "100vh",
-    paddingTop: "20vh"
+    paddingTop: "12vh"
   },
   divider: {
     display: "flex",
@@ -64,7 +65,7 @@ class Login extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Typography variant="h3">Speak Easy</Typography>
+        <img alt="" src={svg} />
         <LoginForm
           emailError={this.state.emailError}
           passwordError={this.state.passwordError}

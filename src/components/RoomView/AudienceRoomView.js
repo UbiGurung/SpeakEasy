@@ -1,7 +1,7 @@
 import React from "react";
-import "emoji-slider";
 import { withStyles } from "@material-ui/core/styles";
-import { Typography, TextField, Button } from "@material-ui/core";
+import { Typography, TextField, Button, Slider } from "@material-ui/core";
+import { theme } from "../../config/theme";
 
 const styles = {
   root: { margin: "24px" },
@@ -11,27 +11,68 @@ const styles = {
   }
 };
 
+const EmojiSlider = withStyles({
+  root: {
+    color: "#3a8589",
+    height: 3,
+    padding: "13px 0"
+  },
+  thumb: {
+    height: 27,
+    width: 27,
+    backgroundColor: "#fff",
+    border: "1px solid currentColor",
+    marginTop: -12,
+    marginLeft: -13,
+    boxShadow: "#ebebeb 0px 2px 2px",
+    "&:focus,&:hover,&$active": {
+      boxShadow: "#ccc 0px 2px 3px 1px"
+    },
+    "& .bar": {
+      // display: inline-block !important;
+      height: 9,
+      width: 1,
+      backgroundColor: "currentColor",
+      marginLeft: 1,
+      marginRight: 1
+    }
+  },
+  active: {},
+  valueLabel: {
+    left: "calc(-50% + 4px)"
+  },
+  track: {
+    height: 6,
+    color: theme.colours.orange
+  },
+  rail: {
+    color: "#d8d8d8",
+    opacity: 1,
+    height: 6
+  }
+})(Slider);
+
 const AudienceRoomView = props => {
-  const {
-    classes,
-    commentError,
-    handleChange,
-    handleSubmit,
-    handleSlide,
-    emoji,
-    sliderValue
-  } = props;
-  console.warn({ sliderValue });
+  const { classes, commentError, handleChange, handleSubmit, emoji } = props;
+
+  function EmojiThumb(props) {
+    console.warn(props);
+    return (
+      <span {...props}>
+        <span style={{ fontSize: "45px" }}>{emoji}</span>
+      </span>
+    );
+  }
+
   return (
     <div className={classes.root}>
       <Typography>Introduction Speech</Typography>
       <Typography>by Sir Speaksalot</Typography>
-      <emoji-slider
-        id="rangeSlider"
-        emoji={emoji}
-        value={sliderValue}
-        onChange={handleSlide}
-      ></emoji-slider>
+      <EmojiSlider
+        ThumbComponent={EmojiThumb}
+        defaultValue={50}
+        onChangeCommitted={(e, value) => handleChange(e, value)}
+      />
       <Typography>your experience in one word</Typography>
       <TextField
         id="outlined-basic"

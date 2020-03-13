@@ -1,19 +1,22 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Avatar, Typography } from "@material-ui/core";
-import svg from "../static/accountBackdrop.svg";
+import svg from "../static/4.svg";
 import { theme } from "../config/theme";
 
 const styles = {
   root: {
-    height: "25vh",
+    height: "29vh",
     display: "flex",
     alignItems: "center",
-    padding: "24px"
-    // backgroundImage: `url(${svg})`
+    padding: "24px",
+    backgroundImage: `url(${svg})`,
+    backgroundPosition: "bottom",
+    backgroundPositionX: "-9px",
+    backgroundSize: "117% 105%"
   },
   text: {
-    color: theme.colours.orange
+    color: theme.colours.accent
   }
 };
 

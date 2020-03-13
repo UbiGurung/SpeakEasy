@@ -5,7 +5,8 @@ import { theme } from "../config/theme";
 
 const styles = {
   root: {
-    margin: "24px"
+    margin: "24px",
+    marginTop: "0px"
   },
   loginButton: {
     width: "fit-content",

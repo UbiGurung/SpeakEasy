@@ -5,7 +5,8 @@ import { withStyles } from "@material-ui/core/styles";
 import { theme } from "../config/theme";
 
 import JoinRoomForm from "../components/AudienceView/JoinRoomForm";
-import { Button, Typography } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import svg from "../static/speakEasyHeader.svg";
 
 const styles = {
   root: {
@@ -13,7 +14,7 @@ const styles = {
     color: theme.colours.text,
     textAlign: "center",
     minHeight: "100vh",
-    paddingTop: "20vh"
+    paddingTop: "12vh"
   },
   divider: {
     display: "flex",
@@ -24,7 +25,7 @@ const styles = {
   },
   hr: {
     width: "35vw",
-    height: "6px",
+    height: "2px",
     background: theme.colours.orange,
     margin: "12px"
   },
@@ -62,7 +63,7 @@ class Home extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Typography variant="h3">Speak Easy</Typography>
+        <img alt="" src={svg} />
         <JoinRoomForm
           error={this.state.error}
           handleChange={this.handleCodeChange}
@@ -70,7 +71,7 @@ class Home extends React.Component {
         />
         <div className={classes.divider}>
           <div className={classes.hr} />
-          OR
+          or
           <div className={classes.hr} />
         </div>
         <Link to="/login">

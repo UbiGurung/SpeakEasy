@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import { theme } from "../config/theme";
 import RegisterForm from "../components/RegisterForm";
-import { Typography, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
+import svg from "../static/speakEasyHeader.svg";
 
 const styles = {
   root: {
@@ -12,7 +13,7 @@ const styles = {
     color: theme.colours.text,
     textAlign: "center",
     minHeight: "100vh",
-    paddingTop: "20vh"
+    paddingTop: "12vh"
   }
 };
 
@@ -48,7 +49,7 @@ class Login extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Typography variant="h3">Speak Easy</Typography>
+        <img alt="" src={svg} />
         <RegisterForm
           usernameError={this.state.usernameError}
           emailError={this.state.emailError}

@@ -20,7 +20,7 @@ class RoomViewContainer extends React.Component {
     this.state = {
       comment: null,
       commentError: null,
-      sliderValue: 0.5,
+      sliderValue: 50,
       isDrawerOpen: false,
       mode: "audience"
     };
@@ -52,28 +52,28 @@ class RoomViewContainer extends React.Component {
     //sendrequest
   };
 
-  handleChangeSlider = event => {
-    this.setState({ sliderValue: event.detail.value });
+  handleChangeSlider = (e, value) => {
+    console.warn(e, value);
+    this.setState({ sliderValue: value });
   };
 
-  getSliderEmoji = () => {
-    if (this.state.sliderValue < 0.25) {
-      return "💔";
-    } else if (this.state.sliderValue < 0.5) {
-      return "💜";
-    } else if (this.state.sliderValue < 0.75) {
-      return "💗";
-    } else {
-      return "💖";
-    }
+  getEmoji = () => {
+    if (this.state.sliderValue <= 20) {
+      return "😫";
+    } else if (this.state.sliderValue <= 40 && this.state.sliderValue > 20) {
+      return "😕 ";
+    } else if (this.state.sliderValue <= 60 && this.state.sliderValue > 40) {
+      return "😐";
+    } else if (this.state.sliderValue <= 80 && this.state.sliderValue > 60) {
+      return "🙂";
+    } else if (this.state.sliderValue > 80) return "🤩";
   };
 
   render() {
     const { classes } = this.props;
 
     const comments = ["so interesting", "amazing", "much wow", "5 stars"];
-
-    const sliderEmoji = this.getSliderEmoji();
+    let emoji = this.getEmoji();
 
     return (
       <div className={classes.root}>
@@ -86,11 +86,9 @@ class RoomViewContainer extends React.Component {
         ) : (
           <AudienceRoomView
             commentError={this.state.commentError}
-            handleChange={this.handleChangeComment}
+            handleChange={this.handleChangeSlider}
             handleSubmit={this.handleSubmitComment}
-            handleSlide={this.handleChangeSlider}
-            emoji={sliderEmoji}
-            sliderValue={this.state.sliderValue}
+            emoji={emoji}
           />
         )}
         <SwipeableDrawer
