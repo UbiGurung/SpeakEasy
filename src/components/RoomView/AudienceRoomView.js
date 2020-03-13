@@ -16,7 +16,7 @@ const styles = {
 
 const EmojiSlider = withStyles({
   root: {
-    color: theme.colours.text,
+    color: "#3a8589",
     height: 3,
     padding: "13px 0"
   },
@@ -62,7 +62,7 @@ const AudienceRoomView = props => {
     handleChange,
     handleSubmit,
     emoji,
-    title
+    handleChangeComment
   } = props;
 
   function EmojiThumb(props) {
@@ -76,8 +76,8 @@ const AudienceRoomView = props => {
 
   return (
     <div className={classes.root}>
-      <Typography>{"Demo"}</Typography>
-      {/* <Typography>by Sir Speaksalot</Typography> */}
+      <Typography>Introduction Speech</Typography>
+      <Typography>by Sir Speaksalot</Typography>
       <EmojiSlider
         ThumbComponent={EmojiThumb}
         defaultValue={50}
@@ -89,7 +89,7 @@ const AudienceRoomView = props => {
         variant="outlined"
         error={commentError}
         helperText={commentError}
-        onChange={handleChange}
+        onChange={(e, value) => handleChangeComment(e)}
       />
       <Button
         className={classes.sendFeedbackButton}

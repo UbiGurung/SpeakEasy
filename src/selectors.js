@@ -73,3 +73,19 @@ export const getSessionsForUser = state => {
     }
     return result;
 };
+
+export const getAllFeedbacksForSession = state => {
+    const feedbacks = [];
+    let index = 0;
+    for (const userKey in state.feedbacks) {
+        for (const dateKey in state.feedbacks[userKey]) {
+            feedbacks[index] = {
+                message: state.feedbacks[userKey][dateKey].message,
+                date: dateKey
+            };
+            index++;
+        }
+    }
+    const resultsOrderd = feedbacks.sort((a, b) => b.date - a.date);
+    return resultsOrderd;
+};

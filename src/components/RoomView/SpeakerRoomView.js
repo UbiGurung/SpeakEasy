@@ -45,7 +45,8 @@ class SpeakerRoomView extends React.Component {
       handleCloseRoom,
       sessionDetails,
       chartData,
-      timeInterval
+      timeInterval,
+      feedbacks
     } = this.props;
 
     return (
@@ -59,8 +60,12 @@ class SpeakerRoomView extends React.Component {
           </span>
         </Typography>
         <div className={classes.commentList}>
-          {comments.map(comment => (
-            <Chip label={comment} className={classes.comment} key={comment} />
+          {feedbacks.map(feedback => (
+            <Chip
+              label={feedback.message}
+              className={classes.comment}
+              key={feedback.messge}
+            />
           ))}
         </div>
         <div>
