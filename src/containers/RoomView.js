@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import {compose} from 'ramda';
 import * as selectors from "../selectors";
 
-import { signOut, endSession, setSessionTimeFrame, getAllVotesForSession } from "../actions";
+import { signOut, endSession, setSessionTimeFrame, getAllVotesForSession, sumbitVote } from "../actions";
 
 import history from '../history';
 
@@ -28,6 +28,17 @@ class RoomViewContainer extends React.Component {
       mode: "audience"
     };
   }
+
+  componentDidUpdate(prevProps){
+    const isSpeaker = this.props.authDetails && (this.props.authDetails.user.uid === this.props.currentSessionDetails.details.speakerId);
+
+    if(!isSpeaker && this.props.isSessionActive){
+        if(prevProps.timeInterval !== undefined && (prevProps.timeInterval !== this.props.timeInterval)){
+          console.warn('sending')
+            this.props.sumbitVote(this.state.sliderValue,this.props.timeInterval, this.props.currentSessionDetails.id )
+        }
+    }
+}
 
   toggleDrawer = open => event => {
     if (
@@ -76,7 +87,7 @@ class RoomViewContainer extends React.Component {
     const comments = ["so interesting", "amazing", "much wow", "5 stars"];
     let emoji = this.getEmoji();
 
-    const isSpeaker = this.props.authDetails && (this.props.authDetails.user.uid === this.props.currentSessionDetails.details.speakerId);
+    const isSpeaker = this.props.authDetails && this.props.currentSessionDetails && (this.props.authDetails.user.uid === this.props.currentSessionDetails.details.speakerId);
 
     return (
       <div className={classes.root}>
@@ -122,6 +133,6 @@ const mapStateToProps = (state) => {
 };
 
 export default compose(
-  connect(mapStateToProps, {signOut, endSession, setSessionTimeFrame, getAllVotesForSession}),
+  connect(mapStateToProps, {signOut, endSession, setSessionTimeFrame, getAllVotesForSession, sumbitVote}),
   withStyles(styles)
 )(RoomViewContainer);
