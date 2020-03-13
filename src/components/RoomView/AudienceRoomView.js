@@ -76,14 +76,19 @@ const AudienceRoomView = props => {
 
   return (
     <div className={classes.root}>
-      <Typography>Introduction Speech</Typography>
-      <Typography>by Sir Speaksalot</Typography>
+      <Typography style={{ marginBottom: "20px" }} variant="h3">
+        Demo
+      </Typography>
+      {/* <Typography>by Sir Speaksalot</Typography> */}
+      <div style={{ height: "40px" }} />
       <EmojiSlider
         ThumbComponent={EmojiThumb}
         defaultValue={50}
         onChangeCommitted={(e, value) => handleChange(e, value)}
       />
-      <Typography>your experience in one word</Typography>
+      <Typography style={{ marginTop: "20px" }}>
+        your experience in one word
+      </Typography>
       <TextField
         id="outlined-basic"
         variant="outlined"
