@@ -6,7 +6,8 @@ import Login from "./containers/Login";
 import Register from "./containers/Register";
 
 import { Router, Switch, Route } from "react-router-dom";
-import history from './history';
+import history from "./history";
+import AdminHome from "./containers/AdminHome";
 
 class App extends Component {
   render() {
@@ -18,6 +19,9 @@ class App extends Component {
           </Route>
           <Route exact path="/account">
             <AccountHome />
+          </Route>
+          <Route exact path="/admin">
+            <AdminHome />
           </Route>
           <Route path="/activeRoom">
             <RoomView />

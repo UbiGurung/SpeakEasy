@@ -5,9 +5,11 @@ import Account from "./Account";
 import AudienceView from "./AudienceView";
 import SpeakerView from "./SpeakerView";
 import { theme } from "../../config/theme";
-import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
+import AdminView from "../../components/AdminView";
+import BusinessIcon from "@material-ui/icons/Business";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver";
+import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
 
 const styles = {
   root: {
@@ -24,10 +26,13 @@ class Home extends React.Component {
       <div className={classes.root}>
         <Account />
         <SwipeableViews>
+          <AdminView />
           <SpeakerView />
           <AudienceView />
         </SwipeableViews>
         {/* <BottomNavigation className={classes.root}>
+          <BottomNavigationAction label="Recents" icon={<BusinessIcon />} />
+
           <BottomNavigationAction
             label="Favorites"
             icon={<RecordVoiceOverIcon />}

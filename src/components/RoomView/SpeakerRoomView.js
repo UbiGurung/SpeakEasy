@@ -3,8 +3,6 @@ import { withStyles } from "@material-ui/core/styles";
 import { Typography, Chip, Button } from "@material-ui/core";
 import { theme } from "../../config/theme";
 
-import SocialRoomTemperatureChart from "../Chart/SocialRoomTemperatureChart";
-
 const styles = {
   root: { margin: "24px" },
   commentList: { display: "inline-grid" },
@@ -64,9 +62,6 @@ class SpeakerRoomView extends React.Component {
           {comments.map(comment => (
             <Chip label={comment} className={classes.comment} key={comment} />
           ))}
-        </div>
-        <div>
-          <SocialRoomTemperatureChart chartData={chartData} />
         </div>
         <div>
           <Button

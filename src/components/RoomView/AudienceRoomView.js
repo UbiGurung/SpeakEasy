@@ -16,7 +16,7 @@ const styles = {
 
 const EmojiSlider = withStyles({
   root: {
-    color: "#3a8589",
+    color: theme.colours.text,
     height: 3,
     padding: "13px 0"
   },
@@ -56,7 +56,14 @@ const EmojiSlider = withStyles({
 })(Slider);
 
 const AudienceRoomView = props => {
-  const { classes, commentError, handleChange, handleSubmit, emoji } = props;
+  const {
+    classes,
+    commentError,
+    handleChange,
+    handleSubmit,
+    emoji,
+    title
+  } = props;
 
   function EmojiThumb(props) {
     console.warn(props);
@@ -69,8 +76,8 @@ const AudienceRoomView = props => {
 
   return (
     <div className={classes.root}>
-      <Typography>Introduction Speech</Typography>
-      <Typography>by Sir Speaksalot</Typography>
+      <Typography>{"Demo"}</Typography>
+      {/* <Typography>by Sir Speaksalot</Typography> */}
       <EmojiSlider
         ThumbComponent={EmojiThumb}
         defaultValue={50}
