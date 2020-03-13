@@ -10,10 +10,11 @@ import {
 import { theme } from "../../config/theme";
 
 const styles = {
-  root: { margin: "24px" },
+  root: { margin: "24px", display: "inline-grid" },
   paper: {
     background: theme.colours.background,
-    width: "fit-content"
+    width: "fit-content",
+    padding: "12px"
   },
   createRoomButton: {
     width: "fit-content",

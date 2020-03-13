@@ -17,7 +17,8 @@ const styles = {
   },
   paper: {
     background: theme.colours.background,
-    width: "fit-content"
+    width: "fit-content",
+    padding: "12px"
   },
   joinRoomButton: {
     width: "fit-content",
@@ -46,7 +47,7 @@ const JoinRoomForm = props => {
             className={classes.joinRoomButton}
             onClick={() => handleClick()}
           >
-            >
+            Enter
           </Button>
         </FormControl>
       </Paper>

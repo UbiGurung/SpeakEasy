@@ -14,11 +14,13 @@ import { theme } from "../config/theme";
 const styles = {
   root: {
     margin: "24px",
-    marginTop: "0px"
+    marginTop: "0px",
+    display: "inline-grid"
   },
   paper: {
     background: theme.colours.background,
-    width: "fit-content"
+    width: "fit-content",
+    padding: "12px"
   },
   loginButton: {
     width: "fit-content",

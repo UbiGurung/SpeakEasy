@@ -12,13 +12,16 @@ import { theme } from "../config/theme";
 const styles = {
   root: {
     margin: "24px",
-    marginTop: "0px"
+    marginTop: "0px",
+    display: "inline-grid"
   },
   paper: {
     background: theme.colours.background,
-    width: "fit-content"
+    width: "fit-content",
+    marginLeft: "84px",
+    padding: "12px"
   },
-  loginButton: {
+  registerButton: {
     width: "fit-content",
     alignSelf: "flex-end",
     background: theme.colours.accent,
@@ -66,11 +69,10 @@ const RegisterForm = props => {
             onChange={e => handleChange(e, "password")}
           />
           <Button
-            className={classes.loginButton}
-            variant="outlined"
+            className={classes.registerButton}
             onClick={() => handleSubmit()}
           >
-            >
+            Register
           </Button>
         </FormControl>
       </Paper>

@@ -17,7 +17,8 @@ const styles = {
     color: theme.colours.text,
     textAlign: "center",
     minHeight: "100vh",
-    paddingTop: "12vh"
+    paddingTop: "12vh",
+    display: "inline-grid"
   }
 };
 

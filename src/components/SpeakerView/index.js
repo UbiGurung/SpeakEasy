@@ -8,7 +8,13 @@ const styles = {
 };
 
 const SpeakerView = props => {
-  const { classes, form, createRoom, handleFormChange, sessionsForUser } = props;
+  const {
+    classes,
+    form,
+    createRoom,
+    handleFormChange,
+    sessionsForUser
+  } = props;
 
   return (
     <div className={classes.root}>
@@ -17,7 +23,7 @@ const SpeakerView = props => {
         handleSubmit={createRoom}
         handleChange={handleFormChange}
       />
-      <RoomHistory sessionsForUser={sessionsForUser}/>
+      <RoomHistory sessionsForUser={sessionsForUser} />
     </div>
   );
 };
