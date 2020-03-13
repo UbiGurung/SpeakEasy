@@ -11,6 +11,7 @@ import { Button, Typography } from "@material-ui/core";
 
 import history from '../history';
 import {fetchSession} from '../actions';
+import * as selectors from '../selectors';
 
 const styles = {
   root: {
@@ -41,13 +42,12 @@ const styles = {
 };
 
 class Home extends React.Component {
-  constructor(props, context) {
+  constructor(props) {
     super(props);
     this.state = { roomCode: null, error: null };
   }
 
   handleCodeChange = event => {
-    console.warn({ event });
     this.setState({ roomCode: event.target.value });
   };
 
@@ -58,11 +58,17 @@ class Home extends React.Component {
   };
 
   joinRoom = () => {
-    this.props.fetchSession(this.state.roomCode).then(() => {
-      history.push("/activeRoom/:" + this.state.roomCode)
-      setInterval(() => window.location.reload(false), 500)
-    });
+    this.props.fetchSession(this.state.roomCode)
   };
+
+  componentDidUpdate(prevProps){
+    // if(!this.props.isSessionActive){
+    //   alert("Unavailable to join session")
+    // }
+    if(this.props.isSessionActive){
+      history.push("/activeRoom")
+    }
+  }
 
   render() {
     const { classes } = this.props;
@@ -92,7 +98,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    state
+    isSessionActive: selectors.getIsCurrentSessionActive(state)
   };
 };
 

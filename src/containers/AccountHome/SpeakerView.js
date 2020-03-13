@@ -1,9 +1,13 @@
 import React from "react";
 import SpeakerView from "../../components/SpeakerView";
 import { connect } from "react-redux";
-import { getAuthUser } from "../../selectors";
+import { getAuthUser, getSessionsForUser } from "../../selectors";
 
-import { signOut, createSession } from "../../actions";
+import { signOut, createSession, startSession, fetchSession, fetchSessionsForUser } from "../../actions";
+
+import {createRoomCodeID} from '../../Helpers';
+
+import history from '../../history';
 
 class SpeakerViewContainer extends React.Component {
   constructor(props) {
@@ -11,13 +15,13 @@ class SpeakerViewContainer extends React.Component {
     this.state = {
       form: {
         title: null,
-        speaker: null,
-        duration: null,
         titleError: null,
-        speakerError: null,
-        durationError: null
       }
     };
+  }
+
+  componentDidMount(){
+    this.props.fetchSessionsForUser(this.props.authUser.user)
   }
 
   handleFormChange = (event, target) => {
@@ -25,14 +29,14 @@ class SpeakerViewContainer extends React.Component {
   };
 
   handleCreateRoom = isStarting => {
-    !this.state.title &&
-      this.setState({ form: { titleError: "title required" } });
-    !this.state.speaker &&
-      this.setState({ form: { speakerError: "speaker required" } });
-    !this.state.duration &&
-      this.setState({ form: { durationError: "time required" } });
+    const sessionId = createRoomCodeID();
 
-    // this.state.username && this.state.email && this.state.password && //sendrequest
+    !this.state.form.title ?
+      this.setState({ form: { titleError: "title required" } }) : this.props.createSession(this.state.form.title, isStarting, sessionId);
+
+      if(isStarting){
+        this.props.fetchSession(sessionId).then(() => history.push('/activeRoom'))
+      }
   };
 
   render() {
@@ -43,6 +47,7 @@ class SpeakerViewContainer extends React.Component {
         createRoom={this.handleCreateRoom}
         form={this.state.form}
         handleFormChange={this.handleFormChange}
+        sessionsForUser={this.props.sessionsForUser}
       />
     );
   }
@@ -50,10 +55,11 @@ class SpeakerViewContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    authUser: getAuthUser(state)
+    authUser: getAuthUser(state),
+    sessionsForUser: getSessionsForUser(state)
   };
 };
 
-export default connect(mapStateToProps, { createSession, signOut })(
+export default connect(mapStateToProps, { createSession, signOut, startSession, fetchSession, fetchSessionsForUser })(
   SpeakerViewContainer
 );

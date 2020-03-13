@@ -21,7 +21,7 @@ const AudienceRoomView = props => {
     emoji,
     sliderValue
   } = props;
-  console.warn({ sliderValue });
+  
   return (
     <div className={classes.root}>
       <Typography>Introduction Speech</Typography>

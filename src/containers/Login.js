@@ -6,6 +6,7 @@ import LoginForm from "../components/LoginForm";
 import { Typography, Button } from "@material-ui/core";
 import {connect} from 'react-redux';
 import {compose} from 'ramda';
+import history from '../history';
 
 import {signInByEmailAndPassword} from '../actions';
 
@@ -60,11 +61,12 @@ class Login extends React.Component {
     !this.state.email && this.setState({ emailError: "email required" });
     !this.state.password && this.setState({ emailError: "password required" });
 
-    this.state.email && this.state.password && this.props.signInByEmailAndPassword(this.state.email, this.state.password)
+    this.state.email && this.state.password && this.props.signInByEmailAndPassword(this.state.email, this.state.password).then(() => {
+      history.push('/account')
+    })
   };
 
   render() {
-    console.warn({state: this.props.state})
     const { classes } = this.props;
 
     return (

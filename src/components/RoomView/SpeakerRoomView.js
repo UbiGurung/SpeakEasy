@@ -15,11 +15,13 @@ const styles = {
 };
 
 const SpeakerRoomView = props => {
-  const { classes, comments, handleCancelRoom, handleCloseRoom } = props;
+  const { classes, comments, handleCloseRoom, sessionDetails } = props;
+
+  console.warn({sessionDetails})
 
   return (
     <div className={classes.root}>
-      <Typography variant="h3">2:45</Typography>
+      <Typography variant="h3">{sessionDetails.id}</Typography>
       <Typography variant="h1">
         <span role="img" aria-label="emoji">
           😍
@@ -31,9 +33,6 @@ const SpeakerRoomView = props => {
         ))}
       </div>
       <div>
-        <Button variant="outlined" onClick={() => handleCancelRoom()}>
-          Cancel
-        </Button>
         <Button
           className={classes.button}
           variant="outlined"

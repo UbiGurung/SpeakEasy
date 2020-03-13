@@ -18,6 +18,10 @@ export const getCurrentSessionId = state => {
     state.sessions.currentSession.id
 }
 
+export const getCurrentSessionDetails = (state) => {
+    return state.sessions.currentSession
+}
+
 export const getChartDataForAllVotes = state => {
     const allVotes = state.votes && state.votes.allVotes;
 
@@ -41,4 +45,17 @@ export const getChartDataForAllVotes = state => {
         return summaryVotes;
     }
     return []
+}
+
+export const getSessionsForUser = state => {
+    const filteredSessions = state.sessions.filteredSessions;
+
+    const result = []
+
+    let index = 0;
+    for (var key in filteredSessions){
+        result[index] = {id: key, title: filteredSessions[key].name, date: filteredSessions[key].date}
+        index++
+    }
+    return result
 }

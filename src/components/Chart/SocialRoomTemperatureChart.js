@@ -55,7 +55,6 @@ class SocialRoomTemperatureChart extends React.Component{
 }
 
 const mapStateToProps = state => {
-    console.warn({state})
     return {
         chartData: selectors.getChartDataForAllVotes(state),
         timeInterval: selectors.getSessionTimeInterval(state),

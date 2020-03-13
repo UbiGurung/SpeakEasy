@@ -2,14 +2,13 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import CreateRoomForm from "./CreateRoomForm";
 import RoomHistory from "./RoomHistory";
-import RoomTemplates from "./RoomTemplates";
 
 const styles = {
   root: { textAlign: "center", minHeight: "75vh" }
 };
 
 const SpeakerView = props => {
-  const { classes, form, createRoom, handleFormChange } = props;
+  const { classes, form, createRoom, handleFormChange, sessionsForUser } = props;
 
   return (
     <div className={classes.root}>
@@ -18,8 +17,7 @@ const SpeakerView = props => {
         handleSubmit={createRoom}
         handleChange={handleFormChange}
       />
-      <RoomTemplates />
-      <RoomHistory />
+      <RoomHistory sessionsForUser={sessionsForUser}/>
     </div>
   );
 };

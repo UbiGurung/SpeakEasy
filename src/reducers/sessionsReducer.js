@@ -8,11 +8,11 @@ export default (state = {}, action) => {
     }
         
     case actionTypes.CREATE_SESSION:{
-        const {sessionId, name, speakerId} = action.payload
+        const {sessionId, name, speakerId, date} = action.payload
 
         return{
             ...state,
-            [sessionId]: {name, speakerId}
+            [sessionId]: {name, speakerId, date}
         }
     }
         
@@ -28,7 +28,6 @@ export default (state = {}, action) => {
 
     case actionTypes.FETCH_SESSION: {
         const {sessionId, data} = action.payload;
-        console.warn({sessionId, data})
         return {
             ...state,
             currentSession: {

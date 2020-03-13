@@ -13,7 +13,7 @@ const styles = {
   }
 };
 
-const RoomHistory = props => {
+const RoomHistory = ({props, sessionsForUser}) => {
   const { classes } = props;
 
   const roomHistory = [
@@ -23,7 +23,7 @@ const RoomHistory = props => {
 
   return (
     <div className={classes.root}>
-      <Typography>rooms you spoke at</Typography>
+      <Typography>Rooms you spoke at</Typography>
       <div>
         {roomHistory.map(room => (
           <div className={classes.roomHistoryCard} key={room.title}>
