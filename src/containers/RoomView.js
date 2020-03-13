@@ -14,7 +14,9 @@ import {
     endSession,
     setSessionTimeFrame,
     getAllVotesForSession,
-    sumbitVote
+    sumbitVote,
+    submitFeedback,
+    getAllFeedbacks
 } from '../actions';
 
 import history from '../history';
@@ -36,7 +38,11 @@ class RoomViewContainer extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getAllVotesForSession(this.props.currentSessionDetails.id);
+        this.props.currentSessionDetails &&
+            this.props.getAllVotesForSession(this.props.currentSessionDetails.id);
+
+        this.props.currentSessionDetails &&
+            this.props.getAllFeedbacks(this.props.currentSessionDetails.id);
     }
 
     componentDidUpdate(prevProps) {
@@ -77,9 +83,9 @@ class RoomViewContainer extends React.Component {
     };
 
     handleSubmitComment = () => {
-        !this.state.comment && this.setState({ commentError: 'comment required' });
-
-        //sendrequest
+        !this.state.comment
+            ? this.setState({ commentError: 'comment required' })
+            : this.props.submitFeedback(this.props.currentSessionDetails.id, this.state.comment);
     };
 
     handleChangeSlider = (e, value) => {
@@ -120,12 +126,14 @@ class RoomViewContainer extends React.Component {
                         setSessionTimeFrame={this.props.setSessionTimeFrame}
                         chartData={this.props.chartData}
                         timeInterval={this.props.timeInterval}
+                        feedbacks={this.props.feedbacks}
                     />
                 ) : (
                     <AudienceRoomView
                         commentError={this.state.commentError}
                         handleChange={this.handleChangeSlider}
                         handleSubmit={this.handleSubmitComment}
+                        handleChangeComment={this.handleChangeComment}
                         emoji={emoji}
                     />
                 )}
@@ -148,7 +156,8 @@ const mapStateToProps = state => {
         currentSessionDetails: selectors.getCurrentSessionDetails(state),
         isSessionActive: selectors.getIsCurrentSessionActive(state),
         timeInterval: selectors.getSessionTimeInterval(state),
-        chartData: selectors.getChartDataForAllVotes(state)
+        chartData: selectors.getChartDataForAllVotes(state),
+        feedbacks: selectors.getAllFeedbacksForSession(state)
     };
 };
 
@@ -158,7 +167,9 @@ export default compose(
         endSession,
         setSessionTimeFrame,
         getAllVotesForSession,
-        sumbitVote
+        sumbitVote,
+        submitFeedback,
+        getAllFeedbacks
     }),
     withStyles(styles)
 )(RoomViewContainer);
