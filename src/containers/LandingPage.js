@@ -11,7 +11,7 @@ import { Button } from "@material-ui/core";
 import svg from "../static/speakEasyHeader.svg";
 
 import history from '../history';
-import {fetchSession} from '../actions';
+import {fetchSession, signInAsAnonymousUser} from '../actions';
 import * as selectors from '../selectors';
 
 const styles = {
@@ -63,11 +63,12 @@ class Home extends React.Component {
   };
 
   componentDidUpdate(prevProps){
+    console.warn({props: this.props})
     // if(!this.props.isSessionActive){
     //   alert("Unavailable to join session")
     // }
     if(this.props.isSessionActive){
-      history.push("/activeRoom")
+      this.props.signInAsAnonymousUser().then(() => history.push("/activeRoom"))
     }
   }
 
@@ -104,6 +105,6 @@ const mapStateToProps = state => {
 };
 
 export default compose(
-  connect(mapStateToProps, {fetchSession}),
+  connect(mapStateToProps, {fetchSession, signInAsAnonymousUser}),
   withStyles(styles)
 )(Home);
