@@ -27,15 +27,37 @@ class SpeakerRoomView extends React.Component {
     }, 10000);
   }
 
+  getEmoji = value => {
+    console.warn("value", value);
+    if (value <= 20) {
+      return "😫";
+    } else if (value <= 40 && value > 20) {
+      return "😕 ";
+    } else if (value <= 60 && value > 40) {
+      return "😐";
+    } else if (value <= 80 && value > 60) {
+      return "🙂";
+    } else if (value > 80) return "🤩";
+  };
+
   render() {
-    const { classes, comments, handleCloseRoom, sessionDetails } = this.props;
+    const {
+      classes,
+      comments,
+      handleCloseRoom,
+      sessionDetails,
+      chartData,
+      timeInterval
+    } = this.props;
 
     return (
       <div className={classes.root}>
         <Typography variant="h3">{sessionDetails.id}</Typography>
         <Typography variant="h1">
           <span role="img" aria-label="emoji">
-            😍
+            {this.getEmoji(
+              chartData[timeInterval] ? chartData[timeInterval].y : 50
+            )}
           </span>
         </Typography>
         <div className={classes.commentList}>
@@ -44,10 +66,14 @@ class SpeakerRoomView extends React.Component {
           ))}
         </div>
         <div>
-          <SocialRoomTemperatureChart />
+          <SocialRoomTemperatureChart chartData={chartData} />
         </div>
         <div>
-          <Button className={classes.button} onClick={() => handleCloseRoom()}>
+          <Button
+            className={classes.button}
+            variant="outlined"
+            onClick={() => handleCloseRoom()}
+          >
             Close Room
           </Button>
         </div>
