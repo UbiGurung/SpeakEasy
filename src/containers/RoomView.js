@@ -125,7 +125,7 @@ class RoomViewContainer extends React.Component {
       this.props.currentSessionDetails &&
       this.props.authDetails.user.uid ===
         this.props.currentSessionDetails.details.speakerId;
-
+    console.warn({ det: this.props.currentSessionDetails });
     return (
       <div className={classes.root}>
         {isSpeaker ? (
@@ -134,6 +134,7 @@ class RoomViewContainer extends React.Component {
             handleCloseRoom={this.handleCloseRoom}
             sessionDetails={this.props.currentSessionDetails}
             setSessionTimeFrame={this.props.setSessionTimeFrame}
+            chartData={this.props.chartData}
             timeInterval={this.props.timeInterval}
             feedbacks={this.props.feedbacks}
           />
