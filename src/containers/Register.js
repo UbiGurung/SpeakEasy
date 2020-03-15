@@ -8,6 +8,7 @@ import { theme } from "../config/theme";
 import RegisterForm from "../components/RegisterForm";
 import { Button } from "@material-ui/core";
 import svg from "../static/speakEasyHeader.svg";
+import history from "../history";
 
 import { createUser } from "../actions";
 
@@ -49,11 +50,15 @@ class Register extends React.Component {
     this.state.username &&
       this.state.email &&
       this.state.password &&
-      this.props.createUser({
-        email: this.state.email,
-        password: this.state.password,
-        name: this.state.username
-      });
+      this.props
+        .createUser({
+          email: this.state.email,
+          password: this.state.password,
+          name: this.state.username
+        })
+        .then(() => {
+          history.push("/account");
+        });
   };
 
   render() {
