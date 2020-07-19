@@ -8,7 +8,7 @@
     "@material-ui/icons": "^4.9.1",
     "emoji-slider": "^0.2.0",
     "firebase": "^5.7.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "materialize-css": "^1.0.0",
     "moment": "^2.24.0",
     "ramda": "^0.27.0",
