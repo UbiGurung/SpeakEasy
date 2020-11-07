@@ -26,7 +26,6 @@ class SpeakerRoomView extends React.Component {
   }
 
   getEmoji = value => {
-    console.warn("value", value);
     if (value <= 20) {
       return "😫";
     } else if (value <= 40 && value > 20) {

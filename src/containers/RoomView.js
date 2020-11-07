@@ -66,7 +66,6 @@ class RoomViewContainer extends React.Component {
   }
 
   toggleDrawer = (open, event) => {
-    console.warn({ event, open });
     if (
       event &&
       event.type === "keydown" &&
@@ -98,7 +97,6 @@ class RoomViewContainer extends React.Component {
   };
 
   handleChangeSlider = (e, value) => {
-    console.warn(e, value);
     this.setState({ sliderValue: value });
   };
 
@@ -125,7 +123,6 @@ class RoomViewContainer extends React.Component {
       this.props.currentSessionDetails &&
       this.props.authDetails.user.uid ===
         this.props.currentSessionDetails.details.speakerId;
-    console.warn({ det: this.props.currentSessionDetails });
     return (
       <div className={classes.root}>
         {isSpeaker ? (
