@@ -7,7 +7,6 @@ import { Button } from "@material-ui/core";
 import svg from "../static/speakEasyHeader.svg";
 import { connect } from "react-redux";
 import { compose } from "ramda";
-import history from "../history";
 
 import { signInByEmailAndPassword } from "../actions";
 
@@ -67,10 +66,7 @@ class Login extends React.Component {
     this.state.email &&
       this.state.password &&
       this.props
-        .signInByEmailAndPassword(this.state.email, this.state.password)
-        .then(() => {
-          history.push("/account");
-        });
+        .signInByEmailAndPassword(this.state.email, this.state.password);
   };
 
   render() {
