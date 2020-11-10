@@ -25,7 +25,7 @@ const styles = {
   loginButton: {
     width: "fit-content",
     alignSelf: "flex-end",
-    color: theme.colours.accent,
+    color: theme.colours.text,
     background: theme.colours.accent,
     fontWeight: "700"
   }
