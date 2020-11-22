@@ -91,3 +91,5 @@ export const getAllFeedbacksForSession = state => {
   const resultsOrderd = feedbacks.sort((a, b) => b.date - a.date);
   return resultsOrderd;
 };
+
+export const getSessionError = state => state.sessions.error;
