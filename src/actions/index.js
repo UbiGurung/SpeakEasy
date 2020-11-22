@@ -1,4 +1,6 @@
 import * as firebase from 'firebase';
+import history from "../history";
+
 
 import { todosRef, sessionByIdRef, allSessionsRef, votesRef, usersRef, sessionEnrolmentByIdRef, allVotesForSessionRef, feedbackRef, allFeedbacksForSessionRef } from '../config/firebase';
 import * as actionTypes from './types';
@@ -47,17 +49,6 @@ export const signInByEmailAndPassword = (email, password) => async dispatch => {
     firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            if (errorCode === 'auth/wrong-password') {
-                alert('Wrong password.');
-            } else {
-                alert(errorMessage);
-            }
-            console.log(error);
-        })
         .then(authUser => {
             dispatch({
                 type: actionTypes.SIGN_IN,
@@ -72,7 +63,17 @@ export const signInByEmailAndPassword = (email, password) => async dispatch => {
                     dispatch(fetchSessionsForUser(user));
                 }
             });
-        });
+
+            history.push("/account");
+
+        })
+        .catch(function(result) {
+            // Handle Errors here.
+            var errorCode = result.code;
+            if (errorCode === 'auth/wrong-password') {
+                alert('Wrong password.');
+            }
+        })
 };
 
 export const signOut = () => async dispatch => {
