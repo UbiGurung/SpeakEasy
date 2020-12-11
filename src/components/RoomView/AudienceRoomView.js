@@ -66,7 +66,6 @@ const AudienceRoomView = props => {
   } = props;
 
   function EmojiThumb(props) {
-    console.warn(props);
     return (
       <span {...props}>
         <span style={{ fontSize: "45px" }}>{emoji}</span>
@@ -100,7 +99,7 @@ const AudienceRoomView = props => {
         className={classes.sendFeedbackButton}
         onClick={() => handleSubmit()}
       >
-        >
+        Send
       </Button>
     </div>
   );

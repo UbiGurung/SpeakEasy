@@ -16,8 +16,6 @@ const styles = {
 const RoomHistory = (props) => {
   const { classes, sessionsForUser } = props;
 
-  console.warn({sessionsForUser})
-
   return (
     <div className={classes.root}>
       <Typography>Rooms you spoke at</Typography>
