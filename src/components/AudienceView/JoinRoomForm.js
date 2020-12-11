@@ -35,16 +35,17 @@ const JoinRoomForm = props => {
     <div className={classes.root}>
       <Paper className={classes.paper} elevation={3}>
         <FormControl>
-          <Typography>enter code to join room</Typography>
+          <Typography>Enter code to join room</Typography>
           <TextField
             id="outlined-basic"
             variant="outlined"
-            error={error}
+            error={Boolean(error)}
             helperText={error}
             onChange={handleChange}
           />
           <Button
             className={classes.joinRoomButton}
+            variant="contained"
             onClick={() => handleClick()}
           >
             Enter

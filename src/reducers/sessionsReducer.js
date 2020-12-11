@@ -12,6 +12,7 @@ export default (state = {}, action) => {
 
         return{
             ...state,
+            error: '',
             [sessionId]: {name, speakerId, date}
         }
     }
@@ -23,24 +24,35 @@ export default (state = {}, action) => {
 
         return {
             ...state,
-            filteredSessionsForUser
+            filteredSessionsForUser,
+            error: ''
         }
     }
 
     case actionTypes.FETCH_SESSION: {
         const {sessionId, data} = action.payload;
+
+        if(data === null){
+            return {
+                ...state,
+                error: "Room does not exist"
+            }
+        }   
+
         return {
             ...state,
             currentSession: {
                 id: sessionId,
                 details: data
-            }
+            },
+            error: ''
         }
     }
 
     case actionTypes.FETCH_SESSION_ENROLMENT:{
         return{
             ...state,
+            error: '',
             currentSessionEnrolment: action.payload
         }
     }

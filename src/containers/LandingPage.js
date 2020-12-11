@@ -51,7 +51,7 @@ class Home extends React.Component {
     }
 
     handleCodeChange = event => {
-        this.setState({ roomCode: event.target.value });
+        this.setState({ roomCode: event.target.value, error: '' });
     };
 
     handleJoinRoom = () => {
@@ -80,7 +80,7 @@ class Home extends React.Component {
             <div className={classes.root}>
                 <img alt="" src={svg} />
                 <JoinRoomForm
-                    error={this.state.error}
+                    error={this.state.error || this.props.sessionError}
                     handleChange={this.handleCodeChange}
                     handleClick={this.handleJoinRoom}
                 />
@@ -99,7 +99,8 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        isSessionActive: selectors.getIsCurrentSessionActive(state)
+        isSessionActive: selectors.getIsCurrentSessionActive(state),
+        sessionError: selectors.getSessionError(state)
     };
 };
 
