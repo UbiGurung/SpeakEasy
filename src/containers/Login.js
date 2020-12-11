@@ -56,17 +56,18 @@ class Login extends React.Component {
   }
 
   handleChange = (event, target) => {
-    this.setState({ [target]: event.target.value });
+    this.setState({ [target]: event.target.value, emailError: '', passwordError: '' });
   };
 
   handleLogin = () => {
-    !this.state.email && this.setState({ emailError: "email required" });
-    !this.state.password && this.setState({ emailError: "password required" });
-
-    this.state.email &&
-      this.state.password &&
+    if(this.state.email && this.state.password){
+      this.setState({emailError: '', passwordError: ''})
       this.props
-        .signInByEmailAndPassword(this.state.email, this.state.password);
+      .signInByEmailAndPassword(this.state.email, this.state.password);
+    }
+
+    !this.state.email && this.setState({ emailError: "email required" });
+    !this.state.password && this.setState({ passwordError: "password required" });
   };
 
   render() {
@@ -76,8 +77,8 @@ class Login extends React.Component {
       <div className={classes.root}>
         <img alt="" src={svg} />
         <LoginForm
-          emailError={this.state.emailError}
-          passwordError={this.state.passwordError}
+          emailError={this.state.emailError || ''}
+          passwordError={this.state.passwordError || ''}
           handleChange={this.handleChange}
           handleSubmit={this.handleLogin}
         />

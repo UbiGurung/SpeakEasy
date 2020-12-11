@@ -51,7 +51,7 @@ class Home extends React.Component {
     }
 
     handleCodeChange = event => {
-        this.setState({ roomCode: event.target.value });
+        this.setState({ roomCode: event.target.value, error: '' });
     };
 
     handleJoinRoom = () => {

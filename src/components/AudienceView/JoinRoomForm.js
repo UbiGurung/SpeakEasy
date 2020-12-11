@@ -39,12 +39,13 @@ const JoinRoomForm = props => {
           <TextField
             id="outlined-basic"
             variant="outlined"
-            error={error || ''}
+            error={Boolean(error)}
             helperText={error}
             onChange={handleChange}
           />
           <Button
             className={classes.joinRoomButton}
+            variant="contained"
             onClick={() => handleClick()}
           >
             Enter
